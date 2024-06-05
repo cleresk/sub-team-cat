@@ -1,9 +1,9 @@
-# **Course project:** Title
-**Authors:** *Author 1*, *Author 2* & *Author 3*
+# **Course project:** Visual World Paradigm
+**Authors:** *Elif Dilara Aygün*, *Karl Jorge Cleres Andreo* & *Yanhong Xu*
 
 **Course:** *Acquisition and analysis of eye-tracking data*
 
-**Semester:** *Summer semester 2023*
+**Semester:** *Summer semester 2024*
 
 ## Project Description
 > Please provide a short description of the main goals. 
