@@ -1,0 +1,55 @@
+---
+title: "Investigating the Visual World Paradigm"
+subtitle: "Do people still make anticipatory eye movements when presented images with motion instead of static ones?"
+
+date: today
+date-format: long
+
+title-block-banner: true
+title-block-style: default
+
+author: 
+- name: Elif Dilara Aygün
+- name: Karl Jorge Cleres Andreo
+- name: Yanhong Xu
+
+affiliation: University of Stuttgart
+
+format: 
+  html:
+    toc: true
+    code-fold: true
+    number-sections: true
+    colorlinks: true
+  pdf:
+    toc: true
+    # code-fold: true -> i think N/A for pdf
+    number-sections: true
+    colorlinks: true
+jupyter: python3
+---
+
+## Introduction
+
+{{< include _introduction.qmd >}}
+
+## Experimental Methods
+
+{{< include _experimental-methods.qmd >}}
+
+## Analysis Methods
+
+{{< include _analysis-methods.qmd >}}
+
+## Results
+
+{{< include _results.qmd >}}
+
+## Discussion
+
+{{< include _discussion.qmd >}}
+
+## Contribution Table
+
+{{< include _contribution-table.qmd >}}
+

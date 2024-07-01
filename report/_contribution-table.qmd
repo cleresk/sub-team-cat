@@ -1,0 +1,18 @@
+The following table gives a detailed insight on how the workload of this project was split between the group members:
+
+| Task                          | Yanhong|  Dilara   |Karl Jorge|
+|-------------------------------|--------|-----------|----------|
+|   Background Literature       |  x     |    o      |          |
+|   Experiment Design           |        |    x      |    x     |
+|   Experiment Implementation   |        |           |    x     |
+|   Stimulus and audio design   |  x     |           |          |
+|   Piloting                    |  x     |    x      |    x     |
+|   Pilot plots                 |        |    x      |    x     |
+|   Data-Recording              |  _     |    _      |    _     |
+|   Background Literature       |  _     |    _      |    _     |
+|   Data Analysis Scripts       |  _     |    _      |    _     |
+|   Report Writing              |  _     |    _      |    _     |
+|   Report Lectorate            |  _     |    _      |    _     |
+|   Project Management          |  x     |           |          |
+
+Legend: x = main, o = supporter
