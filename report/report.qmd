@@ -13,8 +13,6 @@ author:
 - name: Karl Jorge Cleres Andreo
 - name: Yanhong Xu
 
-affiliation: University of Stuttgart
-
 format: 
   html:
     toc: true
