@@ -1,0 +1,14 @@
+10.07.24 Lab Notes
+Participant 01 (ID 6) Group Chicken
+Wearing contact lenses
+Metal part of chin rest is reflecting(?) and eye Tracker thinks there is an eye??
+We covered it up using tape
+
+Particpant said that the amount of Trials made them feel tired to look at the screen after a while
+
+
+Participant 02 (ID 7) Group Wolf
+Participant was wearing glasses
+Calibration was likely insufficient
+Experiment in Opensesame was lagging inbetween Trials
+Participant was getting bored halfway through the experiment
