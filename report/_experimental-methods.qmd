@@ -1,1 +1,11 @@
-TODO
+## Participants
+@Dilara
+
+## Materials & Stimuli
+@Dilara
+
+## Study Design
+@Dilara
+
+## Experiment (implementation)
+@Karl

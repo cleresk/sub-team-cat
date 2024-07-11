@@ -27,27 +27,27 @@ format:
 jupyter: python3
 ---
 
-## Introduction
+# Introduction
 
 {{< include _introduction.qmd >}}
 
-## Experimental Methods
+# Experimental Methods
 
 {{< include _experimental-methods.qmd >}}
 
-## Analysis Methods
-
+# Analysis Methods
+@Karl
 {{< include _analysis-methods.qmd >}}
 
-## Results
+# Results
 
 {{< include _results.qmd >}}
 
-## Discussion
+# Discussion
 
 {{< include _discussion.qmd >}}
 
-## Contribution Table
+# Contribution Table
 
 {{< include _contribution-table.qmd >}}
 

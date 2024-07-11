@@ -1,1 +1,6 @@
-TODO
+## Background
+Intro to the topic, related literature
+
+## Motivation
+
+## Research Question / Hypothesis
