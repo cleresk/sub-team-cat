@@ -8,4 +8,6 @@ Limitations
 
 Challenges during project
 
-Outlook/ improvements / Lessons learned
+## Outlook/ improvements / Lessons learned
+
+We observed some of our participants getting bored during the experiment, either they told us or they started fidgeting more during the trials seeming impatient. This indicates that we should plan a short break halfway through the trials, since the participants might not feel the need to speak up about needing a short break. 
