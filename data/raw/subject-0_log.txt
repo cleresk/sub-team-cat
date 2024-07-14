@@ -1,0 +1,24 @@
+pygaze initiation report start
+display resolution: 1920x1080
+display size in cm: 33.8x27.1
+samplerate: 60.0 Hz
+sampletime: 16.666666666666668 ms
+fixation threshold: 1.5 degrees
+speed threshold: 35 degrees/second
+acceleration threshold: 9500 degrees/second**2
+pygaze initiation report end
+pygaze calibration report start
+accuracy (degrees): LX=0.3242209483487119, LY=0.5272895462371691, RX=0.5784894617889988, RY=0.6099934164127706
+accuracy (in pixels): LX=15.750400000000017, LY=25.615200000000016, RX=28.102400000000017, RY=29.632800000000024
+precision (RMS noise in pixels): X=26.146995285905838, Y=33.419584642706084
+distance between participant and display: 57.0 cm
+fixation threshold: 72.1350984010696 pixels
+speed threshold: 1.6827679496329635 pixels/ms
+acceleration threshold: 460.9834158742855 pixels/ms**2
+pygaze calibration report end
+START_TRIAL 0
+var TRIAL_LOG event=fixation;group=chicken;sentence_id=34;sentence=At the cinema, the girl ate popcorn.;condition=motion;stimulus_name=popcorn;audio=34_popcorn.ogg;sstim_tl=fishing;sstim_tr=keyboard;sstim_bl=popcorn;sstim_br=dice;target_pos=BL;location_cue=cinema;verb_cue_timing=1685;verb_cue=ate;target_cue_timing=2182;trial=0
+var TRIAL_LOG event=preview;group=chicken;sentence_id=34;sentence=At the cinema, the girl ate popcorn.;condition=static;stimulus_name=popcorn;audio=34_popcorn.ogg;sstim_tl=fishing;sstim_tr=keyboard;sstim_bl=popcorn;sstim_br=dice;target_pos=BL;location_cue=cinema;verb_cue_timing=1685;verb_cue=ate;target_cue_timing=2182;trial=0
+var TRIAL_LOG event=audiostart;group=chicken;sentence_id=34;sentence=At the cinema, the girl ate popcorn.;condition=static;stimulus_name=popcorn;audio=34_popcorn.ogg;sstim_tl=fishing;sstim_tr=keyboard;sstim_bl=popcorn;sstim_br=dice;target_pos=BL;location_cue=cinema;verb_cue_timing=1685;verb_cue=ate;target_cue_timing=2182;trial=0
+var TRIAL_LOG event=pause;group=chicken;sentence_id=34;sentence=At the cinema, the girl ate popcorn.;condition=static;stimulus_name=popcorn;audio=34_popcorn.ogg;sstim_tl=fishing;sstim_tr=keyboard;sstim_bl=popcorn;sstim_br=dice;target_pos=BL;location_cue=cinema;verb_cue_timing=1685;verb_cue=ate;target_cue_timing=2182;trial=0
+STOP_TRIAL 0
