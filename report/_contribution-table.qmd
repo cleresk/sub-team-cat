@@ -3,16 +3,16 @@ The following table gives a detailed insight on how the workload of this project
 | Task                          | Yanhong|  Dilara   |Karl Jorge|
 |-------------------------------|--------|-----------|----------|
 |   Background Literature       |  x     |    o      |          |
-|   Experiment Design           |        |    x      |    x     |
+|   Experiment Design           |        |    x      |          |
 |   Experiment Implementation   |        |           |    x     |
 |   Stimulus and audio design   |  x     |           |          |
 |   Piloting                    |  x     |    x      |    x     |
 |   Pilot plots                 |        |    x      |    x     |
-|   Data-Recording              |  _     |    _      |    _     |
-|   Data Analysis Scripts       |  _     |    _      |    _     |
-|   Report Writing              |  _     |    _      |    _     |
-|   Report Lectorate            |  _     |    _      |    _     |
-|   Participant Acquisition     |  x     |           |          |
-|   Project Management          |        |      x     |          |
+|   Data-Recording              |  o     |    x      |    x     |
+|   Data Analysis Scripts       |        |           |    x     |
+|   Report Writing              |  x     |    x      |    o     |
+|   Report Lectorate            |  x     |           |          |
+|   Participant Acquisition     |  x     |     x     |    x     |
+|   Project Management          |        |    x      |          |
 
 Legend: x = main, o = supporter
