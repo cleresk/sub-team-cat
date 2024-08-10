@@ -31,9 +31,9 @@ jupyter: python3
 
 {{< include _introduction.qmd >}}
 
-# Experimental Methods
+# Experiment
 
-{{< include _experimental-methods.qmd >}}
+{{< include _experiment.qmd >}}
 
 # Analysis Methods
 @Karl
