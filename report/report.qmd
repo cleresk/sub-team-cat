@@ -2,11 +2,14 @@
 title: "Investigating the Visual World Paradigm"
 subtitle: "Do people still make anticipatory eye movements when presented images with motion instead of static ones?"
 
+number-sections: true
 date: today
 date-format: long
 
 title-block-banner: true
 title-block-style: default
+
+bibliography: bibliography.bib
 
 author: 
 - name: Elif Dilara Aygün
@@ -27,23 +30,23 @@ format:
 jupyter: python3
 ---
 
-# Introduction
+# Introduction {#sec-introduction}
 
 {{< include _introduction.qmd >}}
 
-# Experiment
+# Experiment {#sec-experiment}
 
 {{< include _experiment.qmd >}}
 
-# Analysis Methods
+# Analysis Methods {#sec-analysis}
 @Karl
 {{< include _analysis-methods.qmd >}}
 
-# Results
+# Results {#sec-results}
 
 {{< include _results.qmd >}}
 
-# Discussion
+# Discussion {#sec-discussion}
 
 {{< include _discussion.qmd >}}
 
