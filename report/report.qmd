@@ -31,7 +31,6 @@ jupyter: python3
 ---
 
 # Introduction {#sec-introduction}
-
 {{< include _introduction.qmd >}}
 
 # Experiment {#sec-experiment}
