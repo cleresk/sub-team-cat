@@ -22,7 +22,7 @@ For the visual stimuli we re-used most of the images from the visual world parad
 
 The stimuli creation process turned out to be a cumbersome process with handling the text-to-speech tool to include breaks and not speak too fast, finding visual stimuli to go with the audios and making sure that there is only one matching target sub-stimuli for each sentence. With our amount of stimuli, it is easy to lose sight of all the different sub-images. Therefore, to make the stimuli creation process easier, we used a central documentation (excel-table) where all the sentences and their corresponding sub-stimuli file names were stated, and the mapping of the shown stimuli version for each condition group. In case something changed, we only had to change the central document and paste its contents to our trial loop in OpenSesame. 
 In the following we provide some stimuli examples: 
-(2 static stimuli, 2 motion stimuli) 1 big image? (figma)
+![Two example sentences that we used in the experiment and their respective static and motion visual stimuli.](Images/Stimuli_examples.png)
 
 ## Implementation
 @Karl
