@@ -5,7 +5,7 @@ This was done by collecting gaze data and analyzing the gaze behavior of the par
 
 We had 10 people participating in our experiment between the ages 18 and 34 where nine people identified as male and one as female. Regarding their English level, most (6) people specified that they have reached at least a C1 level and the remaining (4) people were at a B2 level. Additionally, we asked the participants about their previous experience with eye-tracking. For the majority (7) it was the first time using eye-trackers, the other three stated that they have used eye-trackers before.
 
-Overall, all the participants were able to complete the experiment successfully within 10 to 15 minutes after the calibration. 
+Overall, all the participants were able to complete the experiment successfully without significant complications.
 
 
 ## Study Design
@@ -39,7 +39,7 @@ Once a participant arrived, they were given an information sheet with a brief de
 To counterbalance the number of participants per condition group, we made them pick a card with a unique number between 1-10 and depending on whether the ID was an odd number or not, they got assigned to the corresponding condition group. 
 The participants were asked to make themselves comfortable on the chair and adjust it accordingly to their preference, the same goes for the standard chin rest we used. Both the chair and the chin rest were disinfected before each participant arrived.
 To execute the experiment, we used a standard desktop PC with two displays standing back-to-back in duplicate view, where one was directed to the participant and the other was used by the study conductor to start and supervise the experiment. 
-For tracking, we used the stationary GazePoint GP3 HD eye-tracker (TODO: what frequency to track??)
+For tracking, we used the stationary GazePoint GP3 HD eye-tracker in 150 Hz mode. 
 When starting the experiment in OpenSesame, it starts out with initializing the eye-tracker and calibrating. The calibration process sometimes took multiple attempts until the results looked precise and accurate enough. We always told the participants that the calibration process can require multiple attempts to make sure they dont feel like they are doing something wrong. 
 After the setup, the experiment itself lasted around 12 to 15 minutes. The participants had the control to proceed to the next trial in their own speed and they were informed, that they can take breaks in-between trials, if needed. 
 Finally, we asked the participants some basic demographic information and their previous experiences with eye-tracking. We placed the demographic survey at the end of the experiment to avoid stereotype threat (see @spencer2016stereotype).
