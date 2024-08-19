@@ -1,4 +1,46 @@
+## Logging {#sec-logging}
+
+It is essential to record the occurence of specific events during the experiment, as these will be subject to subsequent analysis. This is achieved by custom logging in OpenSesame. The structure of a custom log is always consistent. It comprises a string containing all the information from the current row in the stimuli table. The string is formated so that each cell of the row is logged as key-value pair and divided by a semicolon. 
+
+> VAR TRIAL_LOG VERB_CUE=EAT;GROUP=CHICKEN;SENTENCE_ID=11; SENTENCE=AT THE FARM, THE GIRL FED THE CHICKEN. ; (...)
+
+In order to facilitate the differentiation of the current event, a key-value pair is appended to the logstring. Four potential events are logged within the experiment, as follows: 
+
+* FIXATION: This event is logged at the beginning of a trial, when the participant is presented the fixation dot on the screen.
+* PREVIEW: Stimuli are presented. 
+* AUDIOSTART: The audio with the sentence starts playing. 
+* PAUSE: The beginning of the pause, where the user has to look at the fixation dot in oder to continue.
+
+ 
+
+
+
+
+
+
+FIXATION, PREVIEW, AUDIOSTART PAUSE
+
+- *TRIAL_WARNING*: 
+
+
+
+
+
 ## Preprocessing
+
+
+
+
+
+```{python}
+#| label: fig-ex
+#| fig-cap: "Example code"
+
+
+
+
+
+```
 
 
 ## Quality Control
