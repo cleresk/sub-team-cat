@@ -1,50 +1,85 @@
-## Logging {#sec-logging}
+This chapter shows how data was gathered, preprocessed and analyzed in order to answer the research question. The analysis was performed in Python 3.12.4 [^5] with the use of the libraries Pandas [^6] and NumPy [^7] for data manipulation and analysis as well as Matplotlib [^8] and Seaborn [^9] for visualisations. The resulting scripts are Jupyter Notebooks and a Python script that depending on the filename can be run for a single subject _(e.g. analysis-subjects.ipynb)_ or for all the subjects _(e.g. analysis-global.ipynb)_. 
 
-It is essential to record the occurence of specific events during the experiment, as these will be subject to subsequent analysis. This is achieved by custom logging in OpenSesame. The structure of a custom log is always consistent. It comprises a string containing all the information from the current row in the stimuli table. The string is formated so that each cell of the row is logged as key-value pair and divided by a semicolon. 
+[^5]: https://www.python.org/downloads/release/python-3124/
+[^6]: https://pypi.org/project/pandas/
+[^7]: https://pypi.org/project/numpy/
+[^8]: https://pypi.org/project/matplotlib/
+[^9]: https://pypi.org/project/seaborn/
+
+## Gathering data / logging {#sec-logging}
+
+In order to calibrate, record and log the gaze data in OpenSesame, we used several built-in pygaze elements. I.e. the the pygaze_init element befor the trial loop in order to perform the calibration. Pygaze_start_recording at the beginning of a trial followed by a logger and a pygaze_stop_recording at the end of a trial. <br>
+
+It is essential to record the occurence of specific events during the experiment, as these will be subject to subsequent analysis. This is achieved by custom logging with the logger item in OpenSesame. The structure of a custom log is always consistent. It comprises a string containing all the information from the current row in the stimuli table. The string is formated so that each cell of the row is logged as key-value pair and divided by a semicolon. 
 
 > VAR TRIAL_LOG VERB_CUE=EAT;GROUP=CHICKEN;SENTENCE_ID=11; SENTENCE=AT THE FARM, THE GIRL FED THE CHICKEN. ; (...)
 
 In order to facilitate the differentiation of the current event, a key-value pair is appended to the logstring. Four potential events are logged within the experiment, as follows: 
 
-* FIXATION: This event is logged at the beginning of a trial, when the participant is presented the fixation dot on the screen.
-* PREVIEW: Stimuli are presented. 
-* AUDIOSTART: The audio with the sentence starts playing. 
-* PAUSE: The beginning of the pause, where the user has to look at the fixation dot in oder to continue.
+* Fixation: This event is logged at the beginning of a trial, when the participant is presented the fixation dot on the screen.
+* Preview: Stimuli are presented. 
+* Audiostart: The audio with the sentence starts playing. 
+* Pause: The beginning of the pause, where the user has to look at the fixation dot in oder to continue.
 
- 
+The subsequent analysis contains two more events which could not be logged in OpenSesame due to its design. Our solution to this problem will be presented in the next chapter.   
 
-
-
-
-
-
-FIXATION, PREVIEW, AUDIOSTART PAUSE
-
-- *TRIAL_WARNING*: 
-
-
-
-
-
-## Preprocessing
-
-
-
-
+## Preprocessing and quality control
+<!-- hier vllt noch sagen, dass das preprocessing jeweils nur für ein subject möglich ist -->
+At the beginning, we filtered out the data that was irrelevant for this research. The following code shows the columns that were dropped:
 
 ```{python}
 #| label: fig-ex
 #| fig-cap: "Example code"
+#| eval: false
+#| code-fold: false
 
+# (...) read data as pandas.DataFrame
 
-
-
-
+# drop unnecessary data
+data = data.drop(["TIME_TICK"], axis=1)
+data = data.drop(["FPOGX", "FPOGY", "FPOGS", "FPOGD", "FPOGID", "FPOGV"], axis=1) 
+data = data.drop(["LPOGX", "LPOGY", "LPOGV", "RPOGX", "RPOGY", "RPOGV"], axis=1)
+data = data.drop(["LPCX", "LPCY", "LPD", "LPS", "LPV", "RPCX", "RPCY", "RPD", "RPS", "RPV"], axis=1)
+data = data.drop(["LEYEX", "LEYEY", "LEYEZ", "LPUPILD", "LPUPILV", "REYEX", "REYEY", "REYEZ", "RPUPILD", "RPUPILV"], axis=1)
+data = data.drop(["CX", "CY", "CS"], axis=1)
 ```
 
+The resulting Dataframe looks like this:
 
-## Quality Control
+| CNT | TIME | BPOGX | BPOGY | BPOGV | USER |
+|:------:|:------:|:------:|:------:|:------:|:------:|
+| 30093 | 204.69383 | 0.33433 | 0.57871 | 1 | START_TRIAL 0 | 
 
+Resulting data and its interpretation can be found in the GazePoint API documentation [^10] and forms the basis for the analysis. <br>
+
+At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the *TRIAL_WARNING* that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot<br>
+
+
+By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one dimensional) interpolator. The time was reorganized so that it matches the sampling rate. Since the eye tracker has a sampling rate of 150hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGY at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br>
+
+Figure @fig-interpolation shows an example function before and after interpolation:
+
+![Figure 3.2.1](Images/Fig3_2_2.png){#fig-interpolation fig-align="center"}
+
+
+In the next step the custom logs were decoded. In this process, the rows of the dataframe containing a *TRIAL_LOG* in the *USER* column were filtered and the logsting was decoded. Therefore all key-value pairs were split and for each key a new column was created. The respective value was placed in the current row of the key column.  
+
+
+Decode custom logs
+Calculate VERBONSET AND TARGETONSET
+
+EXPAND EMPTY CELLS INTO DATAFRAME
+
+
+
+
+
+Finally the format of rows that contained mixed characters was unified and the resulting dataframe as exported into a csv file under the _~/data/preprocessed/_ directory. 
+
+
+[^10]: https://www.gazept.com/dl/Gazepoint_API_v2.0.pdf
+[^11]: https://pypi.org/project/scipy/
 
 ## Analysis pipeline
 
+<!-- The analysis can be divided into two parts one for subject and on global analysis for all subjects. -->

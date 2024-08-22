@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.49">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -116,10 +150,9 @@ div.csl-indent {
   </ul></li>
   <li><a href="#sec-analysis" id="toc-sec-analysis" class="nav-link" data-scroll-target="#sec-analysis"><span class="header-section-number">3</span> Analysis Methods</a>
   <ul class="collapse">
-  <li><a href="#sec-logging" id="toc-sec-logging" class="nav-link" data-scroll-target="#sec-logging"><span class="header-section-number">3.1</span> Logging</a></li>
-  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing"><span class="header-section-number">3.2</span> Preprocessing</a></li>
-  <li><a href="#quality-control" id="toc-quality-control" class="nav-link" data-scroll-target="#quality-control"><span class="header-section-number">3.3</span> Quality Control</a></li>
-  <li><a href="#analysis-pipeline" id="toc-analysis-pipeline" class="nav-link" data-scroll-target="#analysis-pipeline"><span class="header-section-number">3.4</span> Analysis pipeline</a></li>
+  <li><a href="#sec-logging" id="toc-sec-logging" class="nav-link" data-scroll-target="#sec-logging"><span class="header-section-number">3.1</span> Gathering data / logging</a></li>
+  <li><a href="#preprocessing-and-quality-control" id="toc-preprocessing-and-quality-control" class="nav-link" data-scroll-target="#preprocessing-and-quality-control"><span class="header-section-number">3.2</span> Preprocessing and quality control</a></li>
+  <li><a href="#analysis-pipeline" id="toc-analysis-pipeline" class="nav-link" data-scroll-target="#analysis-pipeline"><span class="header-section-number">3.3</span> Analysis pipeline</a></li>
   </ul></li>
   <li><a href="#sec-results" id="toc-sec-results" class="nav-link" data-scroll-target="#sec-results"><span class="header-section-number">4</span> Results</a></li>
   <li><a href="#sec-discussion" id="toc-sec-discussion" class="nav-link" data-scroll-target="#sec-discussion"><span class="header-section-number">5</span> Discussion</a>
@@ -128,7 +161,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#contribution-table" id="toc-contribution-table" class="nav-link" data-scroll-target="#contribution-table"><span class="header-section-number">6</span> Contribution Table</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="..\report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -171,7 +204,7 @@ div.csl-indent {
 </section>
 <section id="study-design" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="study-design"><span class="header-section-number">2.2</span> Study Design</h2>
-<p>We have a between-subject study design with one factor being the visual stimuli type. The factor has two possible levels, with one being static and the other in motion. The participants are exposed to all 64 audio stimuli, but whether the corresponding visual stimuli is static or in motion depends on their condition group, which was determined by their randomly assigned participant ID. For instance, if for stimuli nr. 5 the visual was static for condition group “Chicken”, the stimuli type was simply flipped for the other condition group “Wolf”. With this latin square design, we made sure that the stimuli/condition mappings were equally distributed among both condition groups, as long as the amount of participants in the groups were the same. The order of the stimuli overall was random for each participant by utilizing the random order function within OpenSesame. In summary, we have 64 audio stimuli with two possible matching visual stimuli. The participants were shown 32 visual stimuli for each category, which was determined by their randomly assigned condition group. Each trial started with a fixation dot for one second, followed by a preview of the four images for another second. Then, the audio started playing and the images were still shown x seconds after audio completion, after which the experiment switched back to the fixation dot and the trial was completed. The participant is then able to proceed to the next trial by looking at the fixation dot. A visualization of the trial sequence is shown in figure <img src="Images/Fig2_2_1.png" class="img-fluid" style="width:55.0%" alt="Figure 2.2.1">.</p>
+<p>We have a between-subject study design with one factor being the visual stimuli type. The factor has two possible levels, with one being static and the other in motion. The participants are exposed to all 64 audio stimuli, but whether the corresponding visual stimuli is static or in motion depends on their condition group, which was determined by their randomly assigned participant ID. For instance, if for stimuli nr. 5 the visual was static for condition group “Chicken”, the stimuli type was simply flipped for the other condition group “Wolf”. With this latin square design, we made sure that the stimuli/condition mappings were equally distributed among both condition groups, as long as the amount of participants in the groups were the same. The order of the stimuli overall was random for each participant by utilizing the random order function within OpenSesame. In summary, we have 64 audio stimuli with two possible matching visual stimuli. The participants were shown 32 visual stimuli for each category, which was determined by their randomly assigned condition group. Each trial started with a fixation dot for one second, followed by a preview of the four images for another second. Then, the audio started playing and the images were still shown 500 miliseconds after audio completion, after which the experiment switched back to the fixation dot and the trial was completed. The participant is then able to proceed to the next trial by looking at the fixation dot. A visualization of the trial sequence is shown in figure <img src="Images/Fig2_2_1.png" class="img-fluid" alt="Figure 2.2.1">.</p>
 </section>
 <section id="materials-stimuli" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="materials-stimuli"><span class="header-section-number">2.3</span> Materials &amp; Stimuli</h2>
@@ -185,38 +218,81 @@ We came up with the 64 different sentences by following the described structure 
 </section>
 <section id="implementation" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="implementation"><span class="header-section-number">2.5</span> Implementation</h2>
-<p>The experiment was conducted using the most recent version of OpenSesame 4.0 Melodramatic Milgram with the PyGame backend. The logic is divided into three distinct logical units. <br> In the first unit is used to load custom configuration and preprocess static and motion stimuli. The config-file was managed with the YAML parser and emitter PyYAML <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and used to customize Texts, their layouts and positions, fixation dots, positions of stimuli as well as the general timing of the expermient. This way we kept the experiment flexible for minor changes during the pilot studies or possible future research. Since it was not possible to display videos or gifs in OpenSesame, we used the Python library OpenCV <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> to extract the frames of each mp4-Videofile and save them into a separate folder for each stimulus inside a temporary directory. This directory can be specified in the custom config File, stated above. <br> In the second unit of the experiment, the builtin calibration of OpenSesame was used to calibrate the eyetracker. And the group selection was displayed to the user. <br> The third unit consists of the trial loop. For each trial, the user is shown first a fixation dot, then the four substimuli and afterwards the sentence to the pictures is played as stated in <a href="#sec-stdy-proc" class="quarto-xref">Section&nbsp;2.4</a>. The trial was designed in such a way that it would only commence once the user had fixated on the central fixation dot. In order to maintain a onsistent framerate for each motion stimulus, all the images were placed into an infinite loop, with each sub-stimulus containing an individual frame counter. This counter was reset to the beginning once it reached the final frame. Any concerns regarding the performance of the expriment could be cleared after extensive piloting. Once the designated sentence was played, the infinite loop was interrupted and the pause screen was displayed. The logging took place multiple times during the trial loop and finally logged with the OpenSesame logger. The logging will be discussed in <a href="#sec-logging" class="quarto-xref">Section&nbsp;3.1</a>.</p>
+<p>The experiment was conducted using the most recent version of OpenSesame 4.0 Melodramatic Milgram with the PyGame backend. The logic is divided into three distinct logical units. <br> In the first unit is used to load custom configuration and preprocess static and motion stimuli. The config-file was managed with the YAML parser and emitter PyYAML <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and used to customize texts, their layouts and positions, fixation dots, positions of stimuli as well as the general timing of the expermient. This way we kept the experiment flexible for minor changes during the pilot studies or possible future research. Since it was not possible to display videos or gifs in OpenSesame, we used the Python library OpenCV <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> to extract the frames of each mp4-Videofile and save them into a separate folder for each stimulus inside a temporary directory. This directory can be specified in the custom config File, stated above. <br> In the second unit of the experiment, the built-in calibration of OpenSesame was used to calibrate the eye-tracker and the group selection was displayed to the user. <br> The third unit consists of the trial loop. For each trial, the user is first shown a fixation dot, then the four substimuli and afterwards the sentence to the pictures is played as stated in <a href="#sec-stdy-proc" class="quarto-xref">Section&nbsp;2.4</a>. The trial was designed in such a way that it would only commence once the user had fixated on the central fixation dot. In order to maintain a consistent framerate for each motion stimulus, all the images were placed into an infinite loop, with each sub-stimulus containing an individual frame counter. This counter was reset to the beginning once it reached the final frame. Any concerns regarding the performance of the expriment could be cleared after extensive piloting. Once the designated sentence was played, the infinite loop was interrupted and the pause screen was displayed. The logging took place multiple times during the trial loop and finally logged with the OpenSesame logger. The logging will be discussed in <a href="#sec-logging" class="quarto-xref">Section&nbsp;3.1</a>.</p>
 </section>
 </section>
 <section id="sec-analysis" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Analysis Methods</h1>
 <p><span class="citation" data-cites="Karl">(<a href="#ref-Karl" role="doc-biblioref"><strong>Karl?</strong></a>)</span></p>
+<p>This chapter shows how data was gathered, preprocessed and analyzed in order to answer the research question. The analysis was performed in Python 3.12.4 <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> with the use of the libraries Pandas <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> and NumPy <a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> for data manipulation and analysis as well as Matplotlib <a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> and Seaborn <a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> for visualisations. The resulting scripts are Jupyter Notebooks and a Python script that depending on the filename can be run for a single subject <em>(e.g.&nbsp;analysis-subjects.ipynb)</em> or for all the subjects <em>(e.g.&nbsp;analysis-global.ipynb)</em>.</p>
 <section id="sec-logging" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="sec-logging"><span class="header-section-number">3.1</span> Logging</h2>
-<p>It is essential to record the occurence of specific events during the experiment, as these will be subject to subsequent analysis. This is achieved by custom logging in OpenSesame. The structure of a custom log is always consistent. It comprises a string containing all the information from the current row in the stimuli table. The string is formated so that each cell of the row is logged as key-value pair and divided by a semicolon.</p>
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-logging"><span class="header-section-number">3.1</span> Gathering data / logging</h2>
+<p>In order to calibrate, record and log the gaze data in OpenSesame, we used several built-in pygaze elements. I.e. the the pygaze_init element befor the trial loop in order to perform the calibration. Pygaze_start_recording at the beginning of a trial followed by a logger and a pygaze_stop_recording at the end of a trial. <br></p>
+<p>It is essential to record the occurence of specific events during the experiment, as these will be subject to subsequent analysis. This is achieved by custom logging with the logger item in OpenSesame. The structure of a custom log is always consistent. It comprises a string containing all the information from the current row in the stimuli table. The string is formated so that each cell of the row is logged as key-value pair and divided by a semicolon.</p>
 <blockquote class="blockquote">
 <p>VAR TRIAL_LOG VERB_CUE=EAT;GROUP=CHICKEN;SENTENCE_ID=11; SENTENCE=AT THE FARM, THE GIRL FED THE CHICKEN. ; (…)</p>
 </blockquote>
 <p>In order to facilitate the differentiation of the current event, a key-value pair is appended to the logstring. Four potential events are logged within the experiment, as follows:</p>
 <ul>
-<li>FIXATION: This event is logged at the beginning of a trial, when the participant is presented the fixation dot on the screen.</li>
-<li>PREVIEW: Stimuli are presented.</li>
-<li>AUDIOSTART: The audio with the sentence starts playing.</li>
-<li>PAUSE: The beginning of the pause, where the user has to look at the fixation dot in oder to continue.</li>
+<li>Fixation: This event is logged at the beginning of a trial, when the participant is presented the fixation dot on the screen.</li>
+<li>Preview: Stimuli are presented.</li>
+<li>Audiostart: The audio with the sentence starts playing.</li>
+<li>Pause: The beginning of the pause, where the user has to look at the fixation dot in oder to continue.</li>
 </ul>
-<p>FIXATION, PREVIEW, AUDIOSTART PAUSE</p>
-<ul>
-<li><em>TRIAL_WARNING</em>:</li>
-</ul>
+<p>The subsequent analysis contains two more events which could not be logged in OpenSesame due to its design. Our solution to this problem will be presented in the next chapter.</p>
 </section>
-<section id="preprocessing" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="preprocessing"><span class="header-section-number">3.2</span> Preprocessing</h2>
+<section id="preprocessing-and-quality-control" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="preprocessing-and-quality-control"><span class="header-section-number">3.2</span> Preprocessing and quality control</h2>
+<!-- hier vllt noch sagen, dass das preprocessing jeweils nur für ein subject möglich ist -->
+<p>At the beginning, we filtered out the data that was irrelevant for this research. The following code shows the columns that were dropped:</p>
+<div id="fig-ex" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="fig-ex" data-execution_count="1"><pre class="sourceCode python cell code-with-copy"><code class="sourceCode python"><span id="fig-ex-1"><a href="#fig-ex-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (...) read data as pandas.DataFrame</span></span>
+<span id="fig-ex-2"><a href="#fig-ex-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fig-ex-3"><a href="#fig-ex-3" aria-hidden="true" tabindex="-1"></a><span class="co"># drop unnecessary data</span></span>
+<span id="fig-ex-4"><a href="#fig-ex-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"TIME_TICK"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="fig-ex-5"><a href="#fig-ex-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"FPOGX"</span>, <span class="st">"FPOGY"</span>, <span class="st">"FPOGS"</span>, <span class="st">"FPOGD"</span>, <span class="st">"FPOGID"</span>, <span class="st">"FPOGV"</span>], axis<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="fig-ex-6"><a href="#fig-ex-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LPOGX"</span>, <span class="st">"LPOGY"</span>, <span class="st">"LPOGV"</span>, <span class="st">"RPOGX"</span>, <span class="st">"RPOGY"</span>, <span class="st">"RPOGV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="fig-ex-7"><a href="#fig-ex-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LPCX"</span>, <span class="st">"LPCY"</span>, <span class="st">"LPD"</span>, <span class="st">"LPS"</span>, <span class="st">"LPV"</span>, <span class="st">"RPCX"</span>, <span class="st">"RPCY"</span>, <span class="st">"RPD"</span>, <span class="st">"RPS"</span>, <span class="st">"RPV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="fig-ex-8"><a href="#fig-ex-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LEYEX"</span>, <span class="st">"LEYEY"</span>, <span class="st">"LEYEZ"</span>, <span class="st">"LPUPILD"</span>, <span class="st">"LPUPILV"</span>, <span class="st">"REYEX"</span>, <span class="st">"REYEY"</span>, <span class="st">"REYEZ"</span>, <span class="st">"RPUPILD"</span>, <span class="st">"RPUPILV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="fig-ex-9"><a href="#fig-ex-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"CX"</span>, <span class="st">"CY"</span>, <span class="st">"CS"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>The resulting Dataframe looks like this:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">CNT</th>
+<th style="text-align: center;">TIME</th>
+<th style="text-align: center;">BPOGX</th>
+<th style="text-align: center;">BPOGY</th>
+<th style="text-align: center;">BPOGV</th>
+<th style="text-align: center;">USER</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">30093</td>
+<td style="text-align: center;">204.69383</td>
+<td style="text-align: center;">0.33433</td>
+<td style="text-align: center;">0.57871</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">START_TRIAL 0</td>
+</tr>
+</tbody>
+</table>
+<p>Resulting data and its interpretation can be found in the GazePoint API documentation <a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> and forms the basis for the analysis. <br></p>
+<p>At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the <em>TRIAL_WARNING</em> that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot<br></p>
+<p>By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy <a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> linear (one dimensional) interpolator. The time was reorganized so that it matches the sampling rate. Since the eye tracker has a sampling rate of 150hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGY at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br></p>
+<p>Figure <strong>?@fig-interpolation</strong> shows an example function before and after interpolation: <img src="Images/Fig3_2_1.png" class="img-fluid" alt="Figure 3.2.1">{#fig-interpolation,fig-align=“center”}</p>
 </section>
-<section id="quality-control" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="quality-control"><span class="header-section-number">3.3</span> Quality Control</h2>
-</section>
-<section id="analysis-pipeline" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="analysis-pipeline"><span class="header-section-number">3.4</span> Analysis pipeline</h2>
+<section id="analysis-pipeline" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="analysis-pipeline"><span class="header-section-number">3.3</span> Analysis pipeline</h2>
 </section>
 </section>
 <section id="sec-results" class="level1" data-number="4">
@@ -339,6 +415,13 @@ Spencer, Steven J, Christine Logel, and Paul G Davies. 2016. <span>“Stereotype
 <li id="fn2"><p>https://osdoc.cogsci.nl/3.3/tutorials/visual-world/<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>https://pypi.org/project/PyYAML/<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>https://pypi.org/project/opencv-python/<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>https://www.python.org/downloads/release/python-3124/<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>https://pypi.org/project/pandas/<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>https://pypi.org/project/numpy/<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>https://pypi.org/project/matplotlib/<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>https://pypi.org/project/seaborn/<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>https://www.gazept.com/dl/Gazepoint_API_v2.0.pdf<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>https://pypi.org/project/scipy/<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
