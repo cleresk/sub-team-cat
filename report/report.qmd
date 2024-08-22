@@ -22,9 +22,10 @@ format:
     code-fold: true
     number-sections: true
     colorlinks: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
   pdf:
     toc: true
-    # code-fold: true -> i think N/A for pdf
     number-sections: true
     colorlinks: true
 jupyter: python3
