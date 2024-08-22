@@ -1,3 +1,5 @@
+The Visual World Paradigm (VWP) is an established method in psycholinguistics that involves tracking eye movements to study how individuals process spoken language while viewing visual scenes. It allows researchers to understand how linguistic information influences attention and gaze behavior in real-time. As part of the course "Acquisition and Analysis of Eye-Tracking Data" we implemented the VWP in an experiment with a subsequent data analysis. In this report we provide details to allow reproducibility of the experiment, discuss our study design choices and present our results.
+
 ## Background
 The role of language and visual processing has been studied by many researchers using eye tracking in the visual world paradigm (VWP). VWP is a useful eye-tracking technique which consists of visual scenes that a participant views while listening to some spoken utterances. Participants look at the visual display which contains pictures of objects, meanwhile, the eye tracker monitors the eye movements as the heard language unfolds over time. The spoken utterance can extend from a single word to short narrative or even a story, and the utterance can be related to more than one object. When the eye movement of a saccade (a quick change of gaze moves from one point of fixation to another) happens, the eye tracker yields a time estimation at which word and corresponding picture has been identified on the visual scene while listening to the utterance. In this respect, VWP examines the relationship between the visual stimuli and language input, which also offers a different insight of exploring the integration of visual and language processing happening in the brain (Huettig at al, 2011 & Berends et al, 2016).
 
@@ -7,6 +9,19 @@ After a few decades, since Tanenhaus et al. (1995) introduced the influential st
 
 
 
+ A key study by Altmann and Kamide (1999) demonstrated that anticipatory eye movements could be predicted based on the verb used in a sentence. For example, upon hearing a verb like "eat," participants' gaze would quickly shift to an edible object in the scene before the object itself was mentioned, indicating that verb meaning constrains visual attention.
+
+This ability to predict upcoming referents based on verb semantics highlights the close interaction between language processing and visual attention, providing crucial insights into how language guides our interpretation of the visual world. The original Altmann & Kamide (1999) study used static images, focusing on how specific verbs direct gaze towards the most semantically appropriate object among a set of alternatives.
+
 ## Motivation
 
+We want to build on top of the foundational work of Altmann & Kamide (1999), by aiming to explore how dynamic visual stimuli might affect anticipatory eye movements within the VWP. Given that motion is a powerful cue in guiding visual attention, this study introduces video stimuli to examine whether the presence of motion has an effect on the predictive gaze patterns observed with static images.
+
+The introduction of motion provides a new dimension to understanding the interaction between linguistic information and visual attention. While previous studies have shown that static images paired with predictive verbs can direct gaze, it remains unclear how motion in the visual scene impacts this process. 
+
 ## Research Question / Hypothesis
+Building upon the results of Altmann & Kamide (1999), which suggested that sentence processing is driven by predictive relationships between verbs and objects, our study aims to extend this understanding by introducing moving stimuli into the experimental setup. Specifically, we propose our research question:
+
+
+<p style="text-align: center;">*Do people still make anticipatory eye movements when presented with images that are in motion instead of static ones?*</p>
+This question is grounded in the idea that while humans are naturally inclined to focus on moving objects (TODO: Find References here), the extent to which this influences the predictive power of verbs during sentence processing remains unknown. We hypothesize that the addition of motion might modulate the anticipatory eye movements either by introducing competing visual stimuli that might disrupt the prediction.

@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.47">
+<meta name="generator" content="quarto-1.5.49">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Elif Dilara Aygün">
 <meta name="author" content="Karl Jorge Cleres Andreo">
 <meta name="author" content="Yanhong Xu">
-<meta name="dcterms.date" content="2024-08-19">
+<meta name="dcterms.date" content="2024-08-22">
 
 <title>Investigating the Visual World Paradigm</title>
 <style>
@@ -86,7 +86,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 19, 2024</p>
+        <p class="date">August 22, 2024</p>
       </div>
     </div>
     
@@ -128,7 +128,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#contribution-table" id="toc-contribution-table" class="nav-link" data-scroll-target="#contribution-table"><span class="header-section-number">6</span> Contribution Table</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="..\report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -138,15 +138,31 @@ div.csl-indent {
 
 <section id="sec-introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>The Visual World Paradigm (VWP) is an established method in psycholinguistics that involves tracking eye movements to study how individuals process spoken language while viewing visual scenes. It allows researchers to understand how linguistic information influences attention and gaze behavior in real-time. As part of the course “Acquisition and Analysis of Eye-Tracking Data” we implemented the VWP in an experiment with a subsequent data analysis. In this report we provide details to allow reproducibility of the experiment, discuss our study design choices and present our results.</p>
 <section id="background" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="background"><span class="header-section-number">1.1</span> Background</h2>
-<p>Intro to the topic, related literature</p>
+<p>The role of language and visual processing has been studied by many researchers using eye tracking in the visual world paradigm (VWP). VWP is a useful eye-tracking technique which consists of visual scenes that a participant views while listening to some spoken utterances. Participants look at the visual display which contains pictures of objects, meanwhile, the eye tracker monitors the eye movements as the heard language unfolds over time. The spoken utterance can extend from a single word to short narrative or even a story, and the utterance can be related to more than one object. When the eye movement of a saccade (a quick change of gaze moves from one point of fixation to another) happens, the eye tracker yields a time estimation at which word and corresponding picture has been identified on the visual scene while listening to the utterance. In this respect, VWP examines the relationship between the visual stimuli and language input, which also offers a different insight of exploring the integration of visual and language processing happening in the brain (Huettig at al, 2011 &amp; Berends et al, 2016).</p>
+<p>How people interpret and process spoken language in the context of their contemporary visual field and how eye movements are involved as the language is being processed were first demonstrated experimentally by Cooper (1974). However, the vast majority of researchers have not considered the effects of Cooper’s study, and there is a relatively small body of literature that is concerned with the language processing and eye movements.</p>
+<p>After a few decades, since Tanenhaus et al.&nbsp;(1995) introduced the influential study of VWP in real-time spoken language comprehension, the rapid development of VWP started to flourish in the field, additionally with the contemporary high quality eye-trackers, VWP also has a transformative influence in psycholinguistics (Clifton et al, 2007).</p>
+<p>A key study by Altmann and Kamide (1999) demonstrated that anticipatory eye movements could be predicted based on the verb used in a sentence. For example, upon hearing a verb like “eat,” participants’ gaze would quickly shift to an edible object in the scene before the object itself was mentioned, indicating that verb meaning constrains visual attention.</p>
+<p>This ability to predict upcoming referents based on verb semantics highlights the close interaction between language processing and visual attention, providing crucial insights into how language guides our interpretation of the visual world. The original Altmann &amp; Kamide (1999) study used static images, focusing on how specific verbs direct gaze towards the most semantically appropriate object among a set of alternatives.</p>
 </section>
 <section id="motivation" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="motivation"><span class="header-section-number">1.2</span> Motivation</h2>
+<p>Building on the foundational work of Altmann &amp; Kamide (1999), this research aims to explore how dynamic visual stimuli might affect anticipatory eye movements within the Visual World Paradigm. Given that motion is a powerful cue in guiding visual attention, this study introduces video stimuli to examine whether the presence of motion alters the predictive gaze patterns observed with static images.</p>
+<p>The introduction of motion provides a new dimension to understanding the interaction between linguistic information and visual attention. While previous studies have shown that static images paired with predictive verbs can direct gaze, it remains unclear how motion in the visual scene impacts this process. The hypothesis is that motion could either enhance or interfere with the predictive gaze behavior due to its potential to distract or attract attention more strongly than static images.</p>
 </section>
 <section id="research-question-hypothesis" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="research-question-hypothesis"><span class="header-section-number">1.3</span> Research Question / Hypothesis</h2>
+<p>Altmann &amp; Kamide: “Sentence processing is driven by predictive relationships between words”</p>
+<ul>
+<li>Humans like to look a things that are in motion</li>
+<li>What happens, when we introduce moving stimuli to the visual world paradigm?</li>
+</ul>
+<p>Following the results presented by Altmann &amp; Kamide in their 1999 research paper, we propose the following research question: “Do people still make anticipatory eye movements when presented images with motion instead of static ones?”</p>
+<p>Building upon the results of Altmann &amp; Kamide (1999), which suggested that sentence processing is driven by predictive relationships between verbs and objects, our study aims to extend this understanding by introducing moving stimuli into the experimental setup. Specifically, we investigate:</p>
+<p>Research Question: Do people still make anticipatory eye movements when presented with images that are in motion instead of static ones?</p>
+<p>This question is grounded in the idea that while humans are naturally inclined to focus on moving objects, the extent to which this influences the predictive power of verbs during sentence processing remains unknown. We hypothesize that the addition of motion might modulate the anticipatory eye movements either by strengthening the predictive gaze or by introducing competing visual stimuli that might disrupt the prediction.</p>
 </section>
 </section>
 <section id="sec-experiment" class="level1" data-number="2">
@@ -318,7 +334,7 @@ We came up with the 64 different sentences by following the described structure 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-spencer2016stereotype" class="csl-entry" role="listitem">
-Spencer, Steven J, Christine Logel, and Paul G Davies. 2016. <span>“Stereotype Threat.”</span> <em>Annual Review of Psychology</em> 67: 415–37. <a href="https://doi.org/doi.org/10.1111/j.1559-1816.2008.00362.x">https://doi.org/doi.org/10.1111/j.1559-1816.2008.00362.x</a>.
+Spencer, Steven J, Christine Logel, and Paul G Davies. 2016. <span>“Stereotype Threat.”</span> <em>Annual Review of Psychology</em> 67: 415–37. <a href="https://doi.org/10.1111/j.1559-1816.2008.00362.x">https://doi.org/10.1111/j.1559-1816.2008.00362.x</a>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
