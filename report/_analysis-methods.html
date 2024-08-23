@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -46,17 +80,105 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="preprocessing" class="level1">
-<h1>Preprocessing</h1>
+<p>This chapter shows how data was gathered, preprocessed and analyzed in order to answer the research question. The analysis was performed in Python 3.12.4 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> with the use of the libraries Pandas <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and NumPy <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> for data manipulation and analysis as well as Matplotlib <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> and Seaborn <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> for visualizations. The resulting scripts are Jupyter Notebooks and a Python script that, depending on the filename, can be run for a single subject <em>(e.g.&nbsp;analysis-subjects.ipynb)</em> or for all the subjects <em>(e.g.&nbsp;analysis-global.ipynb)</em>.</p>
+<section id="sec-logging" class="level2">
+<h2 class="anchored" data-anchor-id="sec-logging">Gathering data / logging</h2>
+<p>In order to calibrate, record and log the gaze data in OpenSesame, we used several built-in pygaze elements. For instance, the <em>pygaze_init</em> element is placed before the trial loop in order to perform the calibration. Other elements include the <em>pygaze_start_recording</em> placed at the beginning of a trial followed by a logger and a <em>pygaze_stop_recording</em> at the end of a trial. <br></p>
+<p>It is essential to record the occurence of specific events during the experiment, as these will be subject to our subsequent analysis. This is achieved by custom logging with the logger item in OpenSesame. The structure of a custom log is always consistent. It comprises of a string containing all the information from the current row in the stimuli table. The string is formated in a way that each cell of the row is logged as key-value pair and divided by a semicolon.</p>
+<blockquote class="blockquote">
+<p>VAR TRIAL_LOG VERB_CUE=EAT;GROUP=CHICKEN;SENTENCE_ID=11; SENTENCE=AT THE FARM, THE GIRL FED THE CHICKEN. ; (…)</p>
+</blockquote>
+<p>In order to facilitate the differentiation of the current event, a key-value pair is appended to the log string. Four potential events are logged within the experiment, as follows:</p>
+<ul>
+<li>Fixation: This event is logged at the beginning of a trial, when the participant is presented the fixation dot on the screen.</li>
+<li>Preview: Stimuli are presented.</li>
+<li>Audiostart: The audio with the sentence starts playing.</li>
+<li>Pause: The beginning of the pause, where the user has to look at the fixation dot in oder to continue.</li>
+</ul>
+<p>The subsequent analysis contains two more events which could not be logged in OpenSesame due to its design. Our solution to this problem will be presented in the next chapter.</p>
 </section>
-<section id="quality-control" class="level1">
-<h1>Quality Control</h1>
+<section id="preprocessing-and-quality-control" class="level2">
+<h2 class="anchored" data-anchor-id="preprocessing-and-quality-control">Preprocessing and quality control</h2>
+<!-- hier vllt noch sagen, dass das preprocessing jeweils nur für ein subject möglich ist -->
+<p>At the beginning, we filtered out the data that was irrelevant for this research. The following code shows the columns that were dropped:</p>
+<div id="fig-ex" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="fig-ex" data-execution_count="1"><pre class="sourceCode python cell code-with-copy"><code class="sourceCode python"><span id="fig-ex-1"><a href="#fig-ex-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (...) read data as pandas.DataFrame</span></span>
+<span id="fig-ex-2"><a href="#fig-ex-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fig-ex-3"><a href="#fig-ex-3" aria-hidden="true" tabindex="-1"></a><span class="co"># drop unnecessary data</span></span>
+<span id="fig-ex-4"><a href="#fig-ex-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"TIME_TICK"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="fig-ex-5"><a href="#fig-ex-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"FPOGX"</span>, <span class="st">"FPOGY"</span>, <span class="st">"FPOGS"</span>, <span class="st">"FPOGD"</span>, <span class="st">"FPOGID"</span>, <span class="st">"FPOGV"</span>], axis<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="fig-ex-6"><a href="#fig-ex-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LPOGX"</span>, <span class="st">"LPOGY"</span>, <span class="st">"LPOGV"</span>, <span class="st">"RPOGX"</span>, <span class="st">"RPOGY"</span>, <span class="st">"RPOGV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="fig-ex-7"><a href="#fig-ex-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LPCX"</span>, <span class="st">"LPCY"</span>, <span class="st">"LPD"</span>, <span class="st">"LPS"</span>, <span class="st">"LPV"</span>, <span class="st">"RPCX"</span>, <span class="st">"RPCY"</span>, <span class="st">"RPD"</span>, <span class="st">"RPS"</span>, <span class="st">"RPV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="fig-ex-8"><a href="#fig-ex-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LEYEX"</span>, <span class="st">"LEYEY"</span>, <span class="st">"LEYEZ"</span>, <span class="st">"LPUPILD"</span>, <span class="st">"LPUPILV"</span>, <span class="st">"REYEX"</span>, <span class="st">"REYEY"</span>, <span class="st">"REYEZ"</span>, <span class="st">"RPUPILD"</span>, <span class="st">"RPUPILV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="fig-ex-9"><a href="#fig-ex-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"CX"</span>, <span class="st">"CY"</span>, <span class="st">"CS"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>The resulting Dataframe looks like this:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">CNT</th>
+<th style="text-align: center;">TIME</th>
+<th style="text-align: center;">BPOGX</th>
+<th style="text-align: center;">BPOGY</th>
+<th style="text-align: center;">BPOGV</th>
+<th style="text-align: center;">USER</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">30093</td>
+<td style="text-align: center;">204.69383</td>
+<td style="text-align: center;">0.33433</td>
+<td style="text-align: center;">0.57871</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">START_TRIAL 0</td>
+</tr>
+</tbody>
+</table>
+<p>Resulting data and its interpretation can be found in the GazePoint API documentation <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> and forms the basis for the analysis. <br></p>
+<p>At the beginning, several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefore, the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the <em>TRIAL_WARNING</em> that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards, we plotted the results in a barplot<br></p>
+<p>By plotting a histogram of the time delta between samples, we found out that it is not consistent. Therefore, we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy linear (one dimensional) interpolator <a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. The time was reorganized in a way that it matches the sampling rate. Since the eye-tracker has a sampling rate of 150 Hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGY at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br></p>
+<div id="fig-interpolation" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interpolation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig3_2_1.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interpolation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Interpolation
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-interpolation" class="quarto-xref">Figure&nbsp;2</a> shows an example function before and after interpolation:</p>
+<p>In the next step the custom logs were decoded. In this process, the rows of the dataframe containing a <em>TRIAL_LOG</em> in the <em>USER</em> column were filtered and the logsting was decoded. Therefore all key-value pairs were split and for each key a new column was created. The respective value was placed in the current row of the key column.</p>
+<p>Decode custom logs Calculate VERBONSET AND TARGETONSET</p>
+<p>EXPAND EMPTY CELLS INTO DATAFRAME</p>
+<p>Finally the format of rows that contained mixed characters was unified and the resulting dataframe as exported into a csv file under the <em>~/data/preprocessed/</em> directory.</p>
 </section>
-<section id="analysis-pipeline" class="level1">
-<h1>Analysis pipeline</h1>
+<section id="analysis-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-pipeline">Analysis pipeline</h2>
+<!-- The analysis can be divided into two parts one for subject and on global analysis for all subjects. -->
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>https://www.python.org/downloads/release/python-3124/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://pypi.org/project/pandas/<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>https://pypi.org/project/numpy/<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>https://pypi.org/project/matplotlib/<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>https://pypi.org/project/seaborn/<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>https://www.gazept.com/dl/Gazepoint_API_v2.0.pdf<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>https://pypi.org/project/scipy/<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
