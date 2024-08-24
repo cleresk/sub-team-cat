@@ -28,6 +28,8 @@ format:
     toc: true
     number-sections: true
     colorlinks: true
+    documentclass: scrartcl
+    papersize: letter 
 jupyter: python3
 ---
 
@@ -39,7 +41,7 @@ jupyter: python3
 {{< include _experiment.qmd >}}
 
 # Analysis Methods {#sec-analysis}
-@Karl
+
 {{< include _analysis-methods.qmd >}}
 
 # Results {#sec-results}

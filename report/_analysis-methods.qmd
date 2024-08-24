@@ -23,19 +23,18 @@ In order to facilitate the differentiation of the current event, a key-value pai
 
 The subsequent analysis contains two more events which could not be logged in OpenSesame due to its design. Our solution to this problem will be presented in the next chapter.   
 
-## Preprocessing and quality control
+## Preprocessing and quality control {#sec-pre-quality}
 <!-- hier vllt noch sagen, dass das preprocessing jeweils nur für ein subject möglich ist -->
-At the beginning, we filtered out the data that was irrelevant for this research. The following code shows the columns that were dropped:
+At the beginning, we filtered out the data that was irrelevant for this research. The dropped columns can be seen in @fig-del:
 
 ```{python}
-#| label: fig-ex
-#| fig-cap: "Example code"
+#| label: fig-del
+#| fig-cap: "Filtering of irrelevant data"
 #| eval: false
-#| code-fold: false
 
 # (...) read data as pandas.DataFrame
 
-# drop unnecessary data
+# drop irrelevant data
 data = data.drop(["TIME_TICK"], axis=1)
 data = data.drop(["FPOGX", "FPOGY", "FPOGS", "FPOGD", "FPOGID", "FPOGV"], axis=1) 
 data = data.drop(["LPOGX", "LPOGY", "LPOGV", "RPOGX", "RPOGY", "RPOGV"], axis=1)
@@ -46,40 +45,319 @@ data = data.drop(["CX", "CY", "CS"], axis=1)
 
 The resulting Dataframe looks like this:
 
-| CNT | TIME | BPOGX | BPOGY | BPOGV | USER |
-|:------:|:------:|:------:|:------:|:------:|:------:|
-| 30093 | 204.69383 | 0.33433 | 0.57871 | 1 | START_TRIAL 0 | 
+| TIME | BPOGX | BPOGY | BPOGV | USER |
+|:------:|:------:|:------:|:------:|:------:|
+| 204.69383 | 0.33433 | 0.57871 | 1 | START_TRIAL 0 | 
 
 Resulting data and its interpretation can be found in the GazePoint API documentation [^10] and forms the basis for the analysis. <br>
 
-At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the *TRIAL_WARNING* that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot<br>
+At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the *TRIAL_WARNING* that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot (see @fig-barplt-evts and @fig-barplot-events). <br>
 
+![Counted vs. expected logs for an example subject](Images/Fig3_2_0.png){#fig-barplt-evts fig-align="center"}
 
-By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one dimensional) interpolator. The time was reorganized so that it matches the sampling rate. Since the eye tracker has a sampling rate of 150hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGY at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br>
+```{python}
+#| label: fig-barplot-events
+#| fig-cap: "Counted vs. expected logs for one subject"
+#| eval: false
+
+# finds the occurencies of "word" in data
+def find_occur(data, word):
+    all_text = " ".join(data["USER"].astype(str).values.flatten())
+    total_count = all_text.count(word)
+    return total_count
+
+# (...)
+
+# index
+log_index = ["START_TRIAL", "EVENT=FIXATION", "EVENT=PREVIEW", "EVENT=AUDIOSTART", "EVENT=PAUSE", "STOP_TRIAL", "TRIAL_WARNING"]
+ind = np.arange(len(log_index))
+
+# count occurencies of each word
+count = []
+for log in log_index:
+    count.append(find_occur(data, log))
+
+# load data into dataframe
+logs = pd.DataFrame({"count": count, "expected": expected_logs}, index=log_index)
+
+# (...) plot data
+
+```
+
+By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one dimensional) interpolator (see @fig-interp-code). The time was reorganized so that it matches the sampling rate. Since the eye tracker has a sampling rate of 150hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGY at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. In order to have a correct logging, the events were mapped back to the nearest interpolated time. <br>
+
+```{python}
+#| label: fig-interp-code
+#| fig-cap: "Interpolation"
+#| eval: false
+
+# (...)
+# interpolate BPOGX and BPOGY
+interp_func_x = interp1d(data["TIME"], data["BPOGX"], kind="linear", fill_value="interpolate")
+interp_func_y = interp1d(data["TIME"], data["BPOGY"], kind="linear", fill_value="interpolate")
+interp_func_v = interp1d(data["TIME"], data["BPOGV"], kind="linear", fill_value="interpolate")
+
+# generate new evenly spaced time points
+t_delta = data["TIME"].max() - data["TIME"].min() 
+lin_num = (t_delta * sample_rate).round(0).astype(int)
+
+new_time = np.linspace(data["TIME"].min(), data["TIME"].max(), num=lin_num)
+
+# get interpolated values with new time
+new_bpogx = interp_func_x(new_time)
+new_bpogy = interp_func_y(new_time)
+new_bpogv = interp_func_v(new_time)
+
+# overwrite original dataframe and round like original data
+data = pd.DataFrame({})
+data["TIME"] = new_time
+data["BPOGX"] = new_bpogx.astype(float)
+data["BPOGY"] = new_bpogy.astype(float)
+data["BPOGV"] = new_bpogv.round(0).astype(int)
+
+def find_nearest_index(array, value):
+    idx = (np.abs(array - value)).argmin()
+    return idx
+
+# map user events back to correct time
+for index, row in before_interpol_data.iterrows():
+    if pd.notna(row["USER"]):  # Check if USER event is present
+        nearest_index = find_nearest_index(new_time, row["TIME"])
+        # Add or append the event to the USER column
+        data.at[nearest_index, "USER"] = row["USER"]
+```
 
 Figure @fig-interpolation shows an example function before and after interpolation:
 
-![Figure 3.2.1](Images/Fig3_2_2.png){#fig-interpolation fig-align="center"}
+![BPOGX, BPOGY and the time bins before and after interpolation](Images/Fig3_2_1.png){#fig-interpolation fig-align="center"}
 
 
-In the next step the custom logs were decoded. In this process, the rows of the dataframe containing a *TRIAL_LOG* in the *USER* column were filtered and the logsting was decoded. Therefore all key-value pairs were split and for each key a new column was created. The respective value was placed in the current row of the key column.  
+In the next step the custom logs were decoded. In this process, the rows of the dataframe containing a *TRIAL_LOG* in the *USER* column were filtered and the logsting was decoded. Therefore all key-value pairs were split and for each key a new column was created. The respective value was placed in the current row of the key-column. Afterwards, the *USER* column was dropped. A row that contained a log looks for example like that:
+
+| TIME               |  (...)|BPOGV | SUBJECT | EVENT | TRIAL | GROUP | (...) | VERB_CUE |	TARGET_CUE_TIMING|
+|:------------------:|:----------------:|:------------------:|:----:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| 1487.3... | (...) | 1    | 3 | FIXATION | 0 | WOLF | (...) | SERVED | 2115 |
+
+```{python}
+#| label: fig-cust-log-dec
+#| fig-cap: "Custom log decoding"
+#| eval: false
+
+for index, row in data.iterrows():
+    
+    # add subject to every row
+    data.at[index, "SUBJECT"] = subject_no
+
+    # get loggin row of opengaze data
+    inp = str(row["USER"])
+    
+    if inp.find("TRIAL_LOG") != -1:
+        
+        cleaned_inp = inp.split("VAR TRIAL_LOG ", maxsplit=2)[1]
+        kv_inp = cleaned_inp.split(";")
+
+        # decode key/value-pairs and copy them to column (key) and value (cell)
+        for elem in kv_inp:
+
+            key, val = elem.split("=", maxsplit=1)
+
+            data.at[index, key] = val
+    
+    # other custom logs
+    elif inp.find("TRIAL_WARNING") != -1:
+        
+        data.at[index, "EVENT"] = "WARNING"
+        
+    elif inp.find("START_TRIAL") != -1:
+        
+        data.at[index, "EVENT"] = "START_TRIAL"
+        data.at[index, "TRIAL"] = int(inp[11:].replace(" ", ""))
+    
+    elif inp.find("STOP_TRIAL") != -1:
+        
+        data.at[index, "EVENT"] = "STOP_TRIAL"
+        data.at[index, "TRIAL"] = int(inp[11:].replace(" ", ""))
+
+# drop original log column
+data.drop(columns=["USER"], inplace=True)
+
+```
+
+As mentioned in @sec-logging, two events can not be logged due to the design of OpenSesame. These events are *VERBONSET* and *TARGETONSET*. *VERBONSET* refers to the time, when the sentence is played to the subject and the verb of the sentence is said. *TARGETONSET* is the exact timing where the target word of the sentence is spoken. The in @sec-mat-stim introduced stimuli-table [^12] also contains for each sentence the audio and the time that has passed until the verb and the target word is said. We consider this two time intervals as deltas. Afterwards we took the time were the *AUDIOSTART* event happened and added each time interval to the *AUDIOSTART*-time. The resulting times are the values *VERB- and TARGETONSET*.  @fig-verbtargetonset illustrates this process.   
+
+![Connection between event cues AUDIOSTART, VERB- and TARGETONSET](Images/Fig3_2_2.png){#fig-verbtargetonset fig-align="center"}
+
+```{python}
+#| label: fig-cust-calc-verb-taget-onset
+#| fig-cap: "Custom log decoding"
+#| eval: false
+
+# extend logs with the corresponding events
+audio_start_data = data.query("EVENT=='AUDIOSTART'")
+print(len(audio_start_data))
+for index, row in audio_start_data.iterrows():
+    
+    sample_time = float(row["TIME"])
+    
+    delta_verb_onset = float(row["VERB_CUE_TIMING"])/1000
+    delta_target_onset = float(row["TARGET_CUE_TIMING"])/1000
+    
+    time_verb_onset = sample_time + delta_verb_onset
+    time_target_onset = sample_time + delta_target_onset
+    
+    first_sample_verb = data[data["TIME"] >= time_verb_onset].iloc[0].name
+    first_sample_target = data[data["TIME"] >= time_target_onset].iloc[0].name
+    
+    for field in fields_to_copy:
+        data.at[first_sample_verb, field] = row[field]
+        data.at[first_sample_target, field] = row[field]
+    
+    # Set the EVENT to "VERBONSET"
+    data.at[first_sample_verb, "EVENT"] = "VERBONSET"
+    data.at[first_sample_target, "EVENT"] = "TARGETONSET"
 
 
-Decode custom logs
-Calculate VERBONSET AND TARGETONSET
+```
 
-EXPAND EMPTY CELLS INTO DATAFRAME
+In order to work better with pandas queries, the logs were expanded. That means, that we iterate over all custom logs that were added during this process so far and copy them to the next empty row. If the next row is not empty, the data of the next row gets copied to the next but one row. This process looks like the following:
 
+```
+1: 1 | 3 | FIXATION | 0 | WOLF | (...) | SERVED | 2115 |
+2:                                                       <- custom logs of row 1 are copied here
+3:                                                       <- custom logs of row 1 are copied here
+5: 1 | 3 | PREVIEW  | 0 | WOLF | (...) | SERVED | 2115 |
+6:                                                       <- custom logs of row 5 are copied here
+7:                                                       <- (...)
+```
 
+```{python}
+#| label: fig-log-expansion
+#| fig-cap: "Custom log decoding"
+#| eval: false
 
+# make sure event gets copyied as well
+if "EVENT" not in fields_to_copy:
+    fields_to_copy.append("EVENT")
 
+found_first_evt = False
+for index, row in data.iterrows():
+
+    # skip first samples with NaN
+    if "START_TRIAL" in str(data.at[index, "EVENT"]):
+        found_first_evt = True
+        continue
+
+    if not found_first_evt:
+        continue
+    
+    # copy last log if custom log cells are NaN
+    if pd.isna(data.at[index, "EVENT"]):
+        
+        for field in fields_to_copy:
+            data.at[index, field] = data.at[index-1, field]
+
+```
 
 Finally the format of rows that contained mixed characters was unified and the resulting dataframe as exported into a csv file under the _~/data/preprocessed/_ directory. 
 
+```{python}
+#| label: fig-format-check
+#| fig-cap: "Custom log decoding"
+#| eval: false
+
+data["SUBJECT"] = data["SUBJECT"].fillna(0).astype(int)
+data["TRIAL"] = data["TRIAL"].fillna(0).astype(int)
+data["SENTENCE_ID"] = data["SENTENCE_ID"].fillna(0).astype(int)
+
+```
+
+This concludes the @sec-pre-quality chapter. The full script for the preprocessing is enclosed in the form of a Jupyter notebook and can be found in the project path *~/scripts/preprocess-subject.ipynb*.
 
 [^10]: https://www.gazept.com/dl/Gazepoint_API_v2.0.pdf
 [^11]: https://pypi.org/project/scipy/
+[^12]: Can be found in the project folder under ~/stimuli/0-stimuli-table.xlsx
 
-## Analysis pipeline
+## Measurements, Metrics and Visualisations
 
-<!-- The analysis can be divided into two parts one for subject and on global analysis for all subjects. -->
+
+To verify the correctness, consistency and accuracy of the data collected, especially during the piloting trials, several visualizations were employed. The first one being visualization of the BPOGX and BPOGY coordinates was generated (see Fig. @fig-bpogxy). This plot illustrated the raw gaze points captured by the eye tracker across the screen. 
+
+![Example of best point of gaze for a sentence](Images/Fig4_4_0.png){#fig-bpogxy fig-align="center"}
+
+The scanpath visualization (see @fig-scanpath) was used to trace the path that a subjects eye-movements took to ensure alignment with the expected gaze patterns. The heatmaps (see @fig-heatmap) allowed quick verification of attention directed towards the defined areas of interest (AOI).
+
+![Example scanpath for a sentence](Images/Fig4_4_1.png){#fig-scanpath fig-align="center"}
+
+![Example heatmap for a sentence](Images/Fig4_4_2.png){#fig-heatmap fig-align="center"}
+
+To determine whether a participant directed their gaze toward a target, two primary types of eye movements can be looked at: fixations and saccades. <br>
+
+When considering saccades, several variations of this metric might be interesting to see if the anticipation effect persist when adding motion stimuli. An example therefore would be the first saccade after the target word of a sentence is said. However, the inclusion of such a metric requires precise experimental timing and raises several methodological questions. For example, how should saccades that initiate immediately after the target cue be handled? Overall, saccades are not sufficiently robust for this analysis and introduce a lot of noise, making them impractical within the scope of this project. <br>
+
+Conversely, fixations provide a more straightforward metric. In this study, we are not interested in the duration of fixations or the precise location of the gaze point. Instead, the primary focus is on determining whether the participant is looking at a specific target. Given this requirement, we chose not to analyze fixations directly. Instead, we opted to use the samples from the eye tracker. These samples are more robust and less noisy since they do not need to undergo a fixation detection algorithm, which can create additional noise. <br>
+
+Given the need to accurately detect the specific sub-stimulus at which a participant is looking, four areas of interest were defined. These AOIs correspond to the locations of each sub-stimulus and are slightly larger (350 pixels) than the resolution of each sub-stimulus (300 pixels). This setup results in four AOIs: top-left (TL), top-right (TR), bottom-left (BL), and bottom-right (BR). The center of each AOI corresponds to the relative position of each sub-stimulus to the middle. For example the center top-left AOI is 1/4 of the width and 1/4 of the height. An algorithm was implemented that considers the center positions and calculate two intervals where the BPOGX and BPOGY of a sample need to be located in order to be considered inside the bounding box (see @fig-alg-aoi). Since our metrics base on the AOIs, the algorithm was tested with additional visualisations (see @fig-aoi-valid) and could be used in the further course of the analysis.
+
+```{python}
+#| label: fig-alg-aoi
+#| fig-cap: "Area of interest detection algorithm"
+#| eval: false
+
+# function that checks wheather subject looked at desired area of interest
+def bpog_in_target_bbox(bpogx, bpogy, pos):
+
+    # var "width" and "height" are globally (static) definded
+
+    x = bpogx * width
+    y = bpogy * height
+    
+    if pos == "TL":
+        relpos = (width/4, height/4)
+    elif pos == "TR":
+        relpos = (width*(3/4), height/4)
+    elif pos == "BL":
+        relpos = (width/4, height*(3/4))
+    elif pos == "BR":
+        relpos = (width*(3/4), height*(3/4))
+    else:
+        relpos = -1
+
+    # add/rest 150 + 50 to relative position 
+    pos_x_l = relpos[0] - 200
+    pos_x_r = relpos[0] + 200
+    pos_y_d = relpos[1] - 200
+    pos_y_u = relpos[1] + 200
+
+    # check if in area of interest box
+    if (x > pos_x_l) and (x < pos_x_r):
+        if(y > pos_y_d) and (y < pos_y_u):
+            return True
+
+    return False
+
+```
+
+![Area of interest verification algorithm](Images/Fig4_4_10.png){#fig-aoi-valid fig-align="center"}
+
+With the area of interest fixation algorthmen, we can now have a look at the two metrics of this experiment. The target ratio and the non-target ratio. The target ratio describes the samples that were detected inside the target area of interest in relation to the total amount of examples. The non-target ratio describes the samples that were detected in all other areas of interest except the target aoi in relation to the total samples.
+
+$$
+TR = \frac{Samples  on  target  AOI}{Total  samples}
+$$
+$$
+NTR = \frac{Samples  on  non-target  AOIs}{Total  samples}
+$$
+
+With this two introduced metrics, a variety of interesting analysis and visualisations is possible. The target and non-target ratio can be looked at for an individual subject and sentence with a specific condition (see @fig-trntrstatic). 
+
+![Example targt ratio and non-target ratio for the static condition](Images/Fig4_4_9.png){#fig-trntrstatic fig-align="center"}
+
+Another interesting insight is the average tr and ntr over all subjects for one sentence (see @fig-trntrsentence).
+
+![Example TR and NTR for an example sentence over all subjects](Images/Fig4_4_8.png){#fig-trntrsentence fig-align="center"} 
+
+Our goal is to compare the target ratio and non-target ratio for sentences with the static condition to the sentences with the motion condition. The TR and NTR are measured exactly 50 miliseconds before the *TARGETONSET* event and thereby before the target word is said. Since its only one measure point the TR and NTR for a single sentence can be 1 or 0. For each subject the average target and non-target ratio for all sentences with the static condition *tr(static)* and motion condition *tr(motion)* is calculated. <br>
+
+With the resulting metrics for each subjects, the total average, mean, standard deviation is calculated, visuaized in a boxplot and interpreted. <br>
+
+The scripts to calculate all metrics mentioned above can be found in the project folder under *~/scripts/*.

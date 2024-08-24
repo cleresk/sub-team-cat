@@ -9,7 +9,7 @@
 <meta name="author" content="Elif Dilara Aygün">
 <meta name="author" content="Karl Jorge Cleres Andreo">
 <meta name="author" content="Yanhong Xu">
-<meta name="dcterms.date" content="2024-08-22">
+<meta name="dcterms.date" content="2024-08-24">
 
 <title>Investigating the Visual World Paradigm</title>
 <style>
@@ -92,6 +92,35 @@ div.csl-indent {
 <link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="report_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -120,7 +149,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 22, 2024</p>
+        <p class="date">August 24, 2024</p>
       </div>
     </div>
     
@@ -144,15 +173,15 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#participants" id="toc-participants" class="nav-link" data-scroll-target="#participants"><span class="header-section-number">2.1</span> Participants</a></li>
   <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design"><span class="header-section-number">2.2</span> Study Design</a></li>
-  <li><a href="#materials-stimuli" id="toc-materials-stimuli" class="nav-link" data-scroll-target="#materials-stimuli"><span class="header-section-number">2.3</span> Materials &amp; Stimuli</a></li>
+  <li><a href="#sec-mat-stim" id="toc-sec-mat-stim" class="nav-link" data-scroll-target="#sec-mat-stim"><span class="header-section-number">2.3</span> Materials &amp; Stimuli</a></li>
   <li><a href="#sec-stdy-proc" id="toc-sec-stdy-proc" class="nav-link" data-scroll-target="#sec-stdy-proc"><span class="header-section-number">2.4</span> Study Procedure and Apparatus</a></li>
   <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><span class="header-section-number">2.5</span> Implementation</a></li>
   </ul></li>
   <li><a href="#sec-analysis" id="toc-sec-analysis" class="nav-link" data-scroll-target="#sec-analysis"><span class="header-section-number">3</span> Analysis Methods</a>
   <ul class="collapse">
   <li><a href="#sec-logging" id="toc-sec-logging" class="nav-link" data-scroll-target="#sec-logging"><span class="header-section-number">3.1</span> Gathering data / logging</a></li>
-  <li><a href="#preprocessing-and-quality-control" id="toc-preprocessing-and-quality-control" class="nav-link" data-scroll-target="#preprocessing-and-quality-control"><span class="header-section-number">3.2</span> Preprocessing and quality control</a></li>
-  <li><a href="#analysis-pipeline" id="toc-analysis-pipeline" class="nav-link" data-scroll-target="#analysis-pipeline"><span class="header-section-number">3.3</span> Analysis pipeline</a></li>
+  <li><a href="#sec-pre-quality" id="toc-sec-pre-quality" class="nav-link" data-scroll-target="#sec-pre-quality"><span class="header-section-number">3.2</span> Preprocessing and quality control</a></li>
+  <li><a href="#measurements-metrics-and-visualisations" id="toc-measurements-metrics-and-visualisations" class="nav-link" data-scroll-target="#measurements-metrics-and-visualisations"><span class="header-section-number">3.3</span> Measurements, Metrics and Visualisations</a></li>
   </ul></li>
   <li><a href="#sec-results" id="toc-sec-results" class="nav-link" data-scroll-target="#sec-results"><span class="header-section-number">4</span> Results</a></li>
   <li><a href="#sec-discussion" id="toc-sec-discussion" class="nav-link" data-scroll-target="#sec-discussion"><span class="header-section-number">5</span> Discussion</a>
@@ -206,8 +235,8 @@ div.csl-indent {
 <h2 data-number="2.2" class="anchored" data-anchor-id="study-design"><span class="header-section-number">2.2</span> Study Design</h2>
 <p>We have a between-subject study design with one factor being the visual stimuli type. The factor has two possible levels, with one being static and the other in motion. The participants are exposed to all 64 audio stimuli, but whether the corresponding visual stimuli is static or in motion depends on their condition group, which was determined by their randomly assigned participant ID. For instance, if for stimuli nr. 5 the visual was static for condition group “Chicken”, the stimuli type was simply flipped for the other condition group “Wolf”. With this latin square design, we made sure that the stimuli/condition mappings were equally distributed among both condition groups, as long as the amount of participants in the groups were the same. The order of the stimuli overall was random for each participant by utilizing the random order function within OpenSesame. In summary, we have 64 audio stimuli with two possible matching visual stimuli. The participants were shown 32 visual stimuli for each category, which was determined by their randomly assigned condition group. Each trial started with a fixation dot for one second, followed by a preview of the four images for another second. Then, the audio started playing and the images were still shown 500 miliseconds after audio completion, after which the experiment switched back to the fixation dot and the trial was completed. The participant is then able to proceed to the next trial by looking at the fixation dot. A visualization of the trial sequence is shown in figure <img src="Images/Fig2_2_1.png" class="img-fluid" alt="Figure 2.2.1">.</p>
 </section>
-<section id="materials-stimuli" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="materials-stimuli"><span class="header-section-number">2.3</span> Materials &amp; Stimuli</h2>
+<section id="sec-mat-stim" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-mat-stim"><span class="header-section-number">2.3</span> Materials &amp; Stimuli</h2>
 <p>We have 64 audio stimuli in total with two matching visual stimuli versions, one consisting of four regular images and the other with four GIFs. The audio stimuli consisted of different sentences with the same structure: [location/time], [person] [verb] [object], e.g.: “At breakfast, the girl ate a croissant.” The corresponding visual stimuli consists of four images with only one being closely related to the sentence. In the case of our example we have one image being a croissant and the remaining images being random inedible objects that are not related to breakfast. For the motion stimuli, we just picked out matching GIFs for the four static images. It was important, that the gives had the same speed. The exact specifications for static and motion stimuli as well as the audio stimuli can be found in the README-File of the experiment.<br>
 We came up with the 64 different sentences by following the described structure and created corresponding audios with a free text-to-speech tool<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. For the visual stimuli we re-used most of the images from the visual world paradigm tutorial by OpenSesame <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and looked for additional ones using Google images.</p>
 <p>The stimuli creation process turned out to be a cumbersome process with handling the text-to-speech tool to include breaks and not speak too fast, finding visual stimuli to go with the audios and making sure that there is only one matching target sub-stimuli for each sentence. With our amount of stimuli, it is easy to lose sight of all the different sub-images. Therefore, to make the stimuli creation process easier, we used a central excel sheet as documentation where all the sentences and their corresponding sub-stimuli file names were stated, including which stimuli version (static or motion) will be shown for each condition group. In case something changed, we only had to change the central document and paste its contents to our trial loop in OpenSesame. In the following we provide some stimuli examples: <img src="Images/Fig2_3_1.png" class="img-fluid" alt="Figure 2.3.1"></p>
@@ -223,7 +252,6 @@ We came up with the 64 different sentences by following the described structure 
 </section>
 <section id="sec-analysis" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Analysis Methods</h1>
-<p><span class="citation" data-cites="Karl">(<a href="#ref-Karl" role="doc-biblioref"><strong>Karl?</strong></a>)</span></p>
 <p>This chapter shows how data was gathered, preprocessed and analyzed in order to answer the research question. The analysis was performed in Python 3.12.4 <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> with the use of the libraries Pandas <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> and NumPy <a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> for data manipulation and analysis as well as Matplotlib <a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> and Seaborn <a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> for visualisations. The resulting scripts are Jupyter Notebooks and a Python script that depending on the filename can be run for a single subject <em>(e.g.&nbsp;analysis-subjects.ipynb)</em> or for all the subjects <em>(e.g.&nbsp;analysis-global.ipynb)</em>.</p>
 <section id="sec-logging" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-logging"><span class="header-section-number">3.1</span> Gathering data / logging</h2>
@@ -241,24 +269,27 @@ We came up with the 64 different sentences by following the described structure 
 </ul>
 <p>The subsequent analysis contains two more events which could not be logged in OpenSesame due to its design. Our solution to this problem will be presented in the next chapter.</p>
 </section>
-<section id="preprocessing-and-quality-control" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="preprocessing-and-quality-control"><span class="header-section-number">3.2</span> Preprocessing and quality control</h2>
+<section id="sec-pre-quality" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-pre-quality"><span class="header-section-number">3.2</span> Preprocessing and quality control</h2>
 <!-- hier vllt noch sagen, dass das preprocessing jeweils nur für ein subject möglich ist -->
-<p>At the beginning, we filtered out the data that was irrelevant for this research. The following code shows the columns that were dropped:</p>
-<div id="fig-ex" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<p>At the beginning, we filtered out the data that was irrelevant for this research. The dropped columns can be seen in <a href="#fig-del" class="quarto-xref">Figure&nbsp;1</a>:</p>
+<div id="fig-del" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="fig-ex" data-execution_count="1"><pre class="sourceCode python cell code-with-copy"><code class="sourceCode python"><span id="fig-ex-1"><a href="#fig-ex-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (...) read data as pandas.DataFrame</span></span>
-<span id="fig-ex-2"><a href="#fig-ex-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fig-ex-3"><a href="#fig-ex-3" aria-hidden="true" tabindex="-1"></a><span class="co"># drop unnecessary data</span></span>
-<span id="fig-ex-4"><a href="#fig-ex-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"TIME_TICK"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="fig-ex-5"><a href="#fig-ex-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"FPOGX"</span>, <span class="st">"FPOGY"</span>, <span class="st">"FPOGS"</span>, <span class="st">"FPOGD"</span>, <span class="st">"FPOGID"</span>, <span class="st">"FPOGV"</span>], axis<span class="op">=</span><span class="dv">1</span>) </span>
-<span id="fig-ex-6"><a href="#fig-ex-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LPOGX"</span>, <span class="st">"LPOGY"</span>, <span class="st">"LPOGV"</span>, <span class="st">"RPOGX"</span>, <span class="st">"RPOGY"</span>, <span class="st">"RPOGV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="fig-ex-7"><a href="#fig-ex-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LPCX"</span>, <span class="st">"LPCY"</span>, <span class="st">"LPD"</span>, <span class="st">"LPS"</span>, <span class="st">"LPV"</span>, <span class="st">"RPCX"</span>, <span class="st">"RPCY"</span>, <span class="st">"RPD"</span>, <span class="st">"RPS"</span>, <span class="st">"RPV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="fig-ex-8"><a href="#fig-ex-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LEYEX"</span>, <span class="st">"LEYEY"</span>, <span class="st">"LEYEZ"</span>, <span class="st">"LPUPILD"</span>, <span class="st">"LPUPILV"</span>, <span class="st">"REYEX"</span>, <span class="st">"REYEY"</span>, <span class="st">"REYEZ"</span>, <span class="st">"RPUPILD"</span>, <span class="st">"RPUPILV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="fig-ex-9"><a href="#fig-ex-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"CX"</span>, <span class="st">"CY"</span>, <span class="st">"CS"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div aria-describedby="fig-del-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (...) read data as pandas.DataFrame</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># drop irrelevant data</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"TIME_TICK"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"FPOGX"</span>, <span class="st">"FPOGY"</span>, <span class="st">"FPOGS"</span>, <span class="st">"FPOGD"</span>, <span class="st">"FPOGID"</span>, <span class="st">"FPOGV"</span>], axis<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LPOGX"</span>, <span class="st">"LPOGY"</span>, <span class="st">"LPOGV"</span>, <span class="st">"RPOGX"</span>, <span class="st">"RPOGY"</span>, <span class="st">"RPOGV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LPCX"</span>, <span class="st">"LPCY"</span>, <span class="st">"LPD"</span>, <span class="st">"LPS"</span>, <span class="st">"LPV"</span>, <span class="st">"RPCX"</span>, <span class="st">"RPCY"</span>, <span class="st">"RPD"</span>, <span class="st">"RPS"</span>, <span class="st">"RPV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"LEYEX"</span>, <span class="st">"LEYEY"</span>, <span class="st">"LEYEZ"</span>, <span class="st">"LPUPILD"</span>, <span class="st">"LPUPILV"</span>, <span class="st">"REYEX"</span>, <span class="st">"REYEY"</span>, <span class="st">"REYEZ"</span>, <span class="st">"RPUPILD"</span>, <span class="st">"RPUPILV"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop([<span class="st">"CX"</span>, <span class="st">"CY"</span>, <span class="st">"CS"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-del-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1
 </figcaption>
 </figure>
@@ -267,7 +298,6 @@ Figure&nbsp;1
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">CNT</th>
 <th style="text-align: center;">TIME</th>
 <th style="text-align: center;">BPOGX</th>
 <th style="text-align: center;">BPOGY</th>
@@ -277,7 +307,6 @@ Figure&nbsp;1
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">30093</td>
 <td style="text-align: center;">204.69383</td>
 <td style="text-align: center;">0.33433</td>
 <td style="text-align: center;">0.57871</td>
@@ -287,12 +316,427 @@ Figure&nbsp;1
 </tbody>
 </table>
 <p>Resulting data and its interpretation can be found in the GazePoint API documentation <a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> and forms the basis for the analysis. <br></p>
-<p>At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the <em>TRIAL_WARNING</em> that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot<br></p>
-<p>By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy <a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> linear (one dimensional) interpolator. The time was reorganized so that it matches the sampling rate. Since the eye tracker has a sampling rate of 150hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGY at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br></p>
-<p>Figure <strong>?@fig-interpolation</strong> shows an example function before and after interpolation: <img src="Images/Fig3_2_1.png" class="img-fluid" alt="Figure 3.2.1">{#fig-interpolation,fig-align=“center”}</p>
+<p>At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the <em>TRIAL_WARNING</em> that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot (see <a href="#fig-barplt-evts" class="quarto-xref">Figure&nbsp;2</a> and <a href="#fig-barplot-events" class="quarto-xref">Figure&nbsp;3</a>). <br></p>
+<div id="fig-barplt-evts" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barplt-evts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig3_2_0.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barplt-evts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Counted vs.&nbsp;expected logs for an example subject
+</figcaption>
+</figure>
+</div>
+<div id="fig-barplot-events" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barplot-events-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># finds the occurencies of "word" in data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_occur(data, word):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    all_text <span class="op">=</span> <span class="st">" "</span>.join(data[<span class="st">"USER"</span>].astype(<span class="bu">str</span>).values.flatten())</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    total_count <span class="op">=</span> all_text.count(word)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total_count</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (...)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># index</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>log_index <span class="op">=</span> [<span class="st">"START_TRIAL"</span>, <span class="st">"EVENT=FIXATION"</span>, <span class="st">"EVENT=PREVIEW"</span>, <span class="st">"EVENT=AUDIOSTART"</span>, <span class="st">"EVENT=PAUSE"</span>, <span class="st">"STOP_TRIAL"</span>, <span class="st">"TRIAL_WARNING"</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ind <span class="op">=</span> np.arange(<span class="bu">len</span>(log_index))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># count occurencies of each word</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> []</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> log <span class="kw">in</span> log_index:</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    count.append(find_occur(data, log))</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># load data into dataframe</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> pd.DataFrame({<span class="st">"count"</span>: count, <span class="st">"expected"</span>: expected_logs}, index<span class="op">=</span>log_index)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># (...) plot data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-barplot-events-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3
+</figcaption>
+</figure>
+</div>
+<p>By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy <a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> linear (one dimensional) interpolator (see <a href="#fig-interp-code" class="quarto-xref">Figure&nbsp;4</a>). The time was reorganized so that it matches the sampling rate. Since the eye tracker has a sampling rate of 150hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGY at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. In order to have a correct logging, the events were mapped back to the nearest interpolated time. <br></p>
+<div id="fig-interp-code" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interp-code-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (...)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># interpolate BPOGX and BPOGY</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>interp_func_x <span class="op">=</span> interp1d(data[<span class="st">"TIME"</span>], data[<span class="st">"BPOGX"</span>], kind<span class="op">=</span><span class="st">"linear"</span>, fill_value<span class="op">=</span><span class="st">"interpolate"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>interp_func_y <span class="op">=</span> interp1d(data[<span class="st">"TIME"</span>], data[<span class="st">"BPOGY"</span>], kind<span class="op">=</span><span class="st">"linear"</span>, fill_value<span class="op">=</span><span class="st">"interpolate"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>interp_func_v <span class="op">=</span> interp1d(data[<span class="st">"TIME"</span>], data[<span class="st">"BPOGV"</span>], kind<span class="op">=</span><span class="st">"linear"</span>, fill_value<span class="op">=</span><span class="st">"interpolate"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># generate new evenly spaced time points</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>t_delta <span class="op">=</span> data[<span class="st">"TIME"</span>].<span class="bu">max</span>() <span class="op">-</span> data[<span class="st">"TIME"</span>].<span class="bu">min</span>() </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>lin_num <span class="op">=</span> (t_delta <span class="op">*</span> sample_rate).<span class="bu">round</span>(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>new_time <span class="op">=</span> np.linspace(data[<span class="st">"TIME"</span>].<span class="bu">min</span>(), data[<span class="st">"TIME"</span>].<span class="bu">max</span>(), num<span class="op">=</span>lin_num)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># get interpolated values with new time</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>new_bpogx <span class="op">=</span> interp_func_x(new_time)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>new_bpogy <span class="op">=</span> interp_func_y(new_time)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>new_bpogv <span class="op">=</span> interp_func_v(new_time)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># overwrite original dataframe and round like original data</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({})</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"TIME"</span>] <span class="op">=</span> new_time</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"BPOGX"</span>] <span class="op">=</span> new_bpogx.astype(<span class="bu">float</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"BPOGY"</span>] <span class="op">=</span> new_bpogy.astype(<span class="bu">float</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"BPOGV"</span>] <span class="op">=</span> new_bpogv.<span class="bu">round</span>(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_nearest_index(array, value):</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> (np.<span class="bu">abs</span>(array <span class="op">-</span> value)).argmin()</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> idx</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># map user events back to correct time</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> before_interpol_data.iterrows():</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.notna(row[<span class="st">"USER"</span>]):  <span class="co"># Check if USER event is present</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        nearest_index <span class="op">=</span> find_nearest_index(new_time, row[<span class="st">"TIME"</span>])</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add or append the event to the USER column</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        data.at[nearest_index, <span class="st">"USER"</span>] <span class="op">=</span> row[<span class="st">"USER"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-interp-code-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4
+</figcaption>
+</figure>
+</div>
+<p>Figure <a href="#fig-interpolation" class="quarto-xref">Figure&nbsp;5</a> shows an example function before and after interpolation:</p>
+<div id="fig-interpolation" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interpolation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig3_2_1.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interpolation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: BPOGX, BPOGY and the time bins before and after interpolation
+</figcaption>
+</figure>
+</div>
+<p>In the next step the custom logs were decoded. In this process, the rows of the dataframe containing a <em>TRIAL_LOG</em> in the <em>USER</em> column were filtered and the logsting was decoded. Therefore all key-value pairs were split and for each key a new column was created. The respective value was placed in the current row of the key-column. Afterwards, the <em>USER</em> column was dropped. A row that contained a log looks for example like that:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">TIME</th>
+<th style="text-align: center;">(…)</th>
+<th style="text-align: center;">BPOGV</th>
+<th style="text-align: center;">SUBJECT</th>
+<th style="text-align: center;">EVENT</th>
+<th style="text-align: center;">TRIAL</th>
+<th style="text-align: center;">GROUP</th>
+<th style="text-align: center;">(…)</th>
+<th style="text-align: center;">VERB_CUE</th>
+<th style="text-align: center;">TARGET_CUE_TIMING</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1487.3…</td>
+<td style="text-align: center;">(…)</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">FIXATION</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">WOLF</td>
+<td style="text-align: center;">(…)</td>
+<td style="text-align: center;">SERVED</td>
+<td style="text-align: center;">2115</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<div id="fig-cust-log-dec" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cust-log-dec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> data.iterrows():</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add subject to every row</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    data.at[index, <span class="st">"SUBJECT"</span>] <span class="op">=</span> subject_no</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get loggin row of opengaze data</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    inp <span class="op">=</span> <span class="bu">str</span>(row[<span class="st">"USER"</span>])</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> inp.find(<span class="st">"TRIAL_LOG"</span>) <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        cleaned_inp <span class="op">=</span> inp.split(<span class="st">"VAR TRIAL_LOG "</span>, maxsplit<span class="op">=</span><span class="dv">2</span>)[<span class="dv">1</span>]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        kv_inp <span class="op">=</span> cleaned_inp.split(<span class="st">";"</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># decode key/value-pairs and copy them to column (key) and value (cell)</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> elem <span class="kw">in</span> kv_inp:</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            key, val <span class="op">=</span> elem.split(<span class="st">"="</span>, maxsplit<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            data.at[index, key] <span class="op">=</span> val</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># other custom logs</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> inp.find(<span class="st">"TRIAL_WARNING"</span>) <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        data.at[index, <span class="st">"EVENT"</span>] <span class="op">=</span> <span class="st">"WARNING"</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> inp.find(<span class="st">"START_TRIAL"</span>) <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        data.at[index, <span class="st">"EVENT"</span>] <span class="op">=</span> <span class="st">"START_TRIAL"</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        data.at[index, <span class="st">"TRIAL"</span>] <span class="op">=</span> <span class="bu">int</span>(inp[<span class="dv">11</span>:].replace(<span class="st">" "</span>, <span class="st">""</span>))</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> inp.find(<span class="st">"STOP_TRIAL"</span>) <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        data.at[index, <span class="st">"EVENT"</span>] <span class="op">=</span> <span class="st">"STOP_TRIAL"</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        data.at[index, <span class="st">"TRIAL"</span>] <span class="op">=</span> <span class="bu">int</span>(inp[<span class="dv">11</span>:].replace(<span class="st">" "</span>, <span class="st">""</span>))</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># drop original log column</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>data.drop(columns<span class="op">=</span>[<span class="st">"USER"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cust-log-dec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6
+</figcaption>
+</figure>
+</div>
+<p>As mentioned in <a href="#sec-logging" class="quarto-xref">Section&nbsp;3.1</a>, two events can not be logged due to the design of OpenSesame. These events are <em>VERBONSET</em> and <em>TARGETONSET</em>. <em>VERBONSET</em> refers to the time, when the sentence is played to the subject and the verb of the sentence is said. <em>TARGETONSET</em> is the exact timing where the target word of the sentence is spoken. The in <a href="#sec-mat-stim" class="quarto-xref">Section&nbsp;2.3</a> introduced stimuli-table <a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> also contains for each sentence the audio and the time that has passed until the verb and the target word is said. We consider this two time intervals as deltas. Afterwards we took the time were the <em>AUDIOSTART</em> event happened and added each time interval to the <em>AUDIOSTART</em>-time. The resulting times are the values <em>VERB- and TARGETONSET</em>. <a href="#fig-verbtargetonset" class="quarto-xref">Figure&nbsp;7</a> illustrates this process.</p>
+<div id="fig-verbtargetonset" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-verbtargetonset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig3_2_2.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-verbtargetonset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Connection between event cues AUDIOSTART, VERB- and TARGETONSET
+</figcaption>
+</figure>
+</div>
+<div id="fig-cust-calc-verb-taget-onset" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cust-calc-verb-taget-onset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extend logs with the corresponding events</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>audio_start_data <span class="op">=</span> data.query(<span class="st">"EVENT=='AUDIOSTART'"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(audio_start_data))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> audio_start_data.iterrows():</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    sample_time <span class="op">=</span> <span class="bu">float</span>(row[<span class="st">"TIME"</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    delta_verb_onset <span class="op">=</span> <span class="bu">float</span>(row[<span class="st">"VERB_CUE_TIMING"</span>])<span class="op">/</span><span class="dv">1000</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    delta_target_onset <span class="op">=</span> <span class="bu">float</span>(row[<span class="st">"TARGET_CUE_TIMING"</span>])<span class="op">/</span><span class="dv">1000</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    time_verb_onset <span class="op">=</span> sample_time <span class="op">+</span> delta_verb_onset</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    time_target_onset <span class="op">=</span> sample_time <span class="op">+</span> delta_target_onset</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    first_sample_verb <span class="op">=</span> data[data[<span class="st">"TIME"</span>] <span class="op">&gt;=</span> time_verb_onset].iloc[<span class="dv">0</span>].name</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    first_sample_target <span class="op">=</span> data[data[<span class="st">"TIME"</span>] <span class="op">&gt;=</span> time_target_onset].iloc[<span class="dv">0</span>].name</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> field <span class="kw">in</span> fields_to_copy:</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        data.at[first_sample_verb, field] <span class="op">=</span> row[field]</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        data.at[first_sample_target, field] <span class="op">=</span> row[field]</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set the EVENT to "VERBONSET"</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    data.at[first_sample_verb, <span class="st">"EVENT"</span>] <span class="op">=</span> <span class="st">"VERBONSET"</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    data.at[first_sample_target, <span class="st">"EVENT"</span>] <span class="op">=</span> <span class="st">"TARGETONSET"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cust-calc-verb-taget-onset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8
+</figcaption>
+</figure>
+</div>
+<p>In order to work better with pandas queries, the logs were expanded. That means, that we iterate over all custom logs that were added during this process so far and copy them to the next empty row. If the next row is not empty, the data of the next row gets copied to the next but one row. This process looks like the following:</p>
+<pre><code>1: 1 | 3 | FIXATION | 0 | WOLF | (...) | SERVED | 2115 |
+2:                                                       &lt;- custom logs of row 1 are copied here
+3:                                                       &lt;- custom logs of row 1 are copied here
+5: 1 | 3 | PREVIEW  | 0 | WOLF | (...) | SERVED | 2115 |
+6:                                                       &lt;- custom logs of row 5 are copied here
+7:                                                       &lt;- (...)</code></pre>
+<div id="fig-log-expansion" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="6">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-log-expansion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure event gets copyied as well</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"EVENT"</span> <span class="kw">not</span> <span class="kw">in</span> fields_to_copy:</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    fields_to_copy.append(<span class="st">"EVENT"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>found_first_evt <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> data.iterrows():</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># skip first samples with NaN</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"START_TRIAL"</span> <span class="kw">in</span> <span class="bu">str</span>(data.at[index, <span class="st">"EVENT"</span>]):</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        found_first_evt <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> found_first_evt:</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># copy last log if custom log cells are NaN</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(data.at[index, <span class="st">"EVENT"</span>]):</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> field <span class="kw">in</span> fields_to_copy:</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>            data.at[index, field] <span class="op">=</span> data.at[index<span class="op">-</span><span class="dv">1</span>, field]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-log-expansion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9
+</figcaption>
+</figure>
+</div>
+<p>Finally the format of rows that contained mixed characters was unified and the resulting dataframe as exported into a csv file under the <em>~/data/preprocessed/</em> directory.</p>
+<div id="fig-format-check" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-format-check-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"SUBJECT"</span>] <span class="op">=</span> data[<span class="st">"SUBJECT"</span>].fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"TRIAL"</span>] <span class="op">=</span> data[<span class="st">"TRIAL"</span>].fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"SENTENCE_ID"</span>] <span class="op">=</span> data[<span class="st">"SENTENCE_ID"</span>].fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-format-check-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10
+</figcaption>
+</figure>
+</div>
+<p>This concludes the <a href="#sec-pre-quality" class="quarto-xref">Section&nbsp;3.2</a> chapter. The full script for the preprocessing is enclosed in the form of a Jupyter notebook and can be found in the project path <em>~/scripts/preprocess-subject.ipynb</em>.</p>
 </section>
-<section id="analysis-pipeline" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="analysis-pipeline"><span class="header-section-number">3.3</span> Analysis pipeline</h2>
+<section id="measurements-metrics-and-visualisations" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="measurements-metrics-and-visualisations"><span class="header-section-number">3.3</span> Measurements, Metrics and Visualisations</h2>
+<p>To verify the correctness, consistency and accuracy of the data collected, especially during the piloting trials, several visualizations were employed. The first one being visualization of the BPOGX and BPOGY coordinates was generated (see Fig. <a href="#fig-bpogxy" class="quarto-xref">Figure&nbsp;11</a>). This plot illustrated the raw gaze points captured by the eye tracker across the screen.</p>
+<div id="fig-bpogxy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bpogxy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig4_4_0.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bpogxy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Example of best point of gaze for a sentence
+</figcaption>
+</figure>
+</div>
+<p>The scanpath visualization (see <a href="#fig-scanpath" class="quarto-xref">Figure&nbsp;12</a>) was used to trace the path that a subjects eye-movements took to ensure alignment with the expected gaze patterns. The heatmaps (see <a href="#fig-heatmap" class="quarto-xref">Figure&nbsp;13</a>) allowed quick verification of attention directed towards the defined areas of interest (AOI).</p>
+<div id="fig-scanpath" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scanpath-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig4_4_1.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scanpath-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Example scanpath for a sentence
+</figcaption>
+</figure>
+</div>
+<div id="fig-heatmap" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig4_4_2.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Example heatmap for a sentence
+</figcaption>
+</figure>
+</div>
+<p>To determine whether a participant directed their gaze toward a target, two primary types of eye movements can be looked at: fixations and saccades. <br></p>
+<p>When considering saccades, several variations of this metric might be interesting to see if the anticipation effect persist when adding motion stimuli. An example therefore would be the first saccade after the target word of a sentence is said. However, the inclusion of such a metric requires precise experimental timing and raises several methodological questions. For example, how should saccades that initiate immediately after the target cue be handled? Overall, saccades are not sufficiently robust for this analysis and introduce a lot of noise, making them impractical within the scope of this project. <br></p>
+<p>Conversely, fixations provide a more straightforward metric. In this study, we are not interested in the duration of fixations or the precise location of the gaze point. Instead, the primary focus is on determining whether the participant is looking at a specific target. Given this requirement, we chose not to analyze fixations directly. Instead, we opted to use the samples from the eye tracker. These samples are more robust and less noisy since they do not need to undergo a fixation detection algorithm, which can create additional noise. <br></p>
+<p>Given the need to accurately detect the specific sub-stimulus at which a participant is looking, four areas of interest were defined. These AOIs correspond to the locations of each sub-stimulus and are slightly larger (350 pixels) than the resolution of each sub-stimulus (300 pixels). This setup results in four AOIs: top-left (TL), top-right (TR), bottom-left (BL), and bottom-right (BR). The center of each AOI corresponds to the relative position of each sub-stimulus to the middle. For example the center top-left AOI is 1/4 of the width and 1/4 of the height. An algorithm was implemented that considers the center positions and calculate two intervals where the BPOGX and BPOGY of a sample need to be located in order to be considered inside the bounding box (see <a href="#fig-alg-aoi" class="quarto-xref">Figure&nbsp;14</a>). Since our metrics base on the AOIs, the algorithm was tested with additional visualisations (see <a href="#fig-aoi-valid" class="quarto-xref">Figure&nbsp;15</a>) and could be used in the further course of the analysis.</p>
+<div id="fig-alg-aoi" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="8">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-alg-aoi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function that checks wheather subject looked at desired area of interest</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bpog_in_target_bbox(bpogx, bpogy, pos):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># var "width" and "height" are globally (static) definded</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> bpogx <span class="op">*</span> width</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> bpogy <span class="op">*</span> height</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pos <span class="op">==</span> <span class="st">"TL"</span>:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        relpos <span class="op">=</span> (width<span class="op">/</span><span class="dv">4</span>, height<span class="op">/</span><span class="dv">4</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> pos <span class="op">==</span> <span class="st">"TR"</span>:</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        relpos <span class="op">=</span> (width<span class="op">*</span>(<span class="dv">3</span><span class="op">/</span><span class="dv">4</span>), height<span class="op">/</span><span class="dv">4</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> pos <span class="op">==</span> <span class="st">"BL"</span>:</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        relpos <span class="op">=</span> (width<span class="op">/</span><span class="dv">4</span>, height<span class="op">*</span>(<span class="dv">3</span><span class="op">/</span><span class="dv">4</span>))</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> pos <span class="op">==</span> <span class="st">"BR"</span>:</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        relpos <span class="op">=</span> (width<span class="op">*</span>(<span class="dv">3</span><span class="op">/</span><span class="dv">4</span>), height<span class="op">*</span>(<span class="dv">3</span><span class="op">/</span><span class="dv">4</span>))</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        relpos <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add/rest 150 + 50 to relative position </span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    pos_x_l <span class="op">=</span> relpos[<span class="dv">0</span>] <span class="op">-</span> <span class="dv">200</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    pos_x_r <span class="op">=</span> relpos[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">200</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    pos_y_d <span class="op">=</span> relpos[<span class="dv">1</span>] <span class="op">-</span> <span class="dv">200</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    pos_y_u <span class="op">=</span> relpos[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">200</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if in area of interest box</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x <span class="op">&gt;</span> pos_x_l) <span class="kw">and</span> (x <span class="op">&lt;</span> pos_x_r):</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(y <span class="op">&gt;</span> pos_y_d) <span class="kw">and</span> (y <span class="op">&lt;</span> pos_y_u):</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-alg-aoi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14
+</figcaption>
+</figure>
+</div>
+<div id="fig-aoi-valid" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-aoi-valid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig4_4_10.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-aoi-valid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: Area of interest verification algorithm
+</figcaption>
+</figure>
+</div>
+<p>With the area of interest fixation algorthmen, we can now have a look at the two metrics of this experiment. The target ratio and the non-target ratio. The target ratio describes the samples that were detected inside the target area of interest in relation to the total amount of examples. The non-target ratio describes the samples that were detected in all other areas of interest except the target aoi in relation to the total samples.</p>
+<p><span class="math display">\[
+TR = \frac{Samples  on  target  AOI}{Total  samples}
+\]</span> <span class="math display">\[
+NTR = \frac{Samples  on  non-target  AOIs}{Total  samples}
+\]</span></p>
+<p>With this two introduced metrics, a variety of interesting analysis and visualisations is possible. The target and non-target ratio can be looked at for an individual subject and sentence with a specific condition (see <a href="#fig-trntrstatic" class="quarto-xref">Figure&nbsp;16</a>).</p>
+<div id="fig-trntrstatic" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-trntrstatic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig4_4_9.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trntrstatic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: Example targt ratio and non-target ratio for the static condition
+</figcaption>
+</figure>
+</div>
+<p>Another interesting insight is the average tr and ntr over all subjects for one sentence (see <a href="#fig-trntrsentence" class="quarto-xref">Figure&nbsp;17</a>).</p>
+<div id="fig-trntrsentence" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-trntrsentence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Fig4_4_8.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trntrsentence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17: TR and NTR for an example sentence over all subjects
+</figcaption>
+</figure>
+</div>
+<p>Our goal is to compare the target and non-target ratio for sentences and stimuli with the static condition with the sentences and stimuli with the motion condition. For each subject the target and non-target ratio for all sentences with the static <em>tr(static)</em> and motion condition <em>tr(motion)</em> is calculated. With the resulting metrics for each subjects, the average, mean, standard deviation is calculated and visuaized in a boxplot. <br></p>
+<p>The scripts to calculate all metrics mentioned above can be found in the project folder under <em>~/scripts/</em>.</p>
 </section>
 </section>
 <section id="sec-results" class="level1" data-number="4">
@@ -422,6 +866,7 @@ Spencer, Steven J, Christine Logel, and Paul G Davies. 2016. <span>“Stereotype
 <li id="fn9"><p>https://pypi.org/project/seaborn/<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p>https://www.gazept.com/dl/Gazepoint_API_v2.0.pdf<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>https://pypi.org/project/scipy/<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Can be found in the project folder under ~/stimuli/0-stimuli-table.xlsx<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
