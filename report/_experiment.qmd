@@ -1,12 +1,6 @@
 In this chapter we go over the methodology details of our experiment. We are interested in comparing the gaze behavior of the participants when they are presented with static or moving images accompanied by a related audible sentence.
 This was done by collecting gaze data and analyzing the gaze behavior of the participants (@sec-analysis). 
 
-## Participants
-
-We had 10 people participating in our experiment between the ages 18 and 34 where nine people identified as male and one as female. Regarding their English level, most (6) people specified that they have reached at least a C1 level and the remaining (4) people were at a B2 level. Additionally, we asked the participants about their previous experience with eye-tracking. For the majority (7) it was the first time using eye-trackers, the other three stated that they have used eye-trackers before.
-
-Overall, all the participants were able to complete the experiment successfully without significant complications.
-
 
 ## Study Design
 We have a between-subject study design with one factor being the visual stimuli type. The factor has two possible levels, with one being static and the other in motion. 
