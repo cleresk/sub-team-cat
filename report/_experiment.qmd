@@ -1,17 +1,16 @@
 In this chapter we go over the methodology details of our experiment. We are interested in comparing the gaze behavior of the participants when they are presented with static or moving images accompanied by a related audible sentence.
 This was done by collecting gaze data and analyzing the gaze behavior of the participants (@sec-analysis). 
 
-## Participants
-
-We had 10 people participating in our experiment between the ages 18 and 34 where nine people identified as male and one as female. Regarding their English level, most (6) people specified that they have reached at least a C1 level and the remaining (4) people were at a B2 level. Additionally, we asked the participants about their previous experience with eye-tracking. For the majority (7) it was the first time using eye-trackers, the other three stated that they have used eye-trackers before.
-
-Overall, all the participants were able to complete the experiment successfully without significant complications.
-
 
 ## Study Design
 We have a between-subject study design with one factor being the visual stimuli type. The factor has two possible levels, with one being static and the other in motion. 
 The participants are exposed to all 64 audio stimuli, but whether the corresponding visual stimuli is static or in motion depends on their condition group, which was determined by their randomly assigned participant ID. For instance, if for stimuli nr. 5 the visual was static for condition group “Chicken”, the stimuli type was simply flipped for the other condition group “Wolf”. With this latin square design, we made sure that the stimuli/condition mappings were equally distributed among both condition groups, as long as the amount of participants in the groups were the same. The order of the stimuli overall was random for each participant by utilizing the random order function within OpenSesame. In summary, we have 64 audio stimuli with two possible matching visual stimuli. The participants were shown 32 visual stimuli for each category, which was determined by their randomly assigned condition group. 
-Each trial started with a fixation dot for one second, followed by a preview of the four images for another second. Then, the audio started playing and the images were still shown 500 miliseconds after audio completion, after which the experiment switched back to the fixation dot and the trial was completed. The participant is then able to proceed to the next trial by looking at the fixation dot. A visualization of the trial sequence is shown in figure ![Figure 2.2.1](Images/Fig2_2_1.png){width=55%,fig-align="center"}.
+Each trial started with a fixation dot for one second, followed by a preview of the four images for another second. Then, the audio started playing and the images were still shown 500 miliseconds after audio completion, after which the experiment switched back to the fixation dot and the trial was completed. The participant is then able to proceed to the next trial by looking at the fixation dot. <br>
+
+A visualization of the trial sequence is shown in @fig-trials:
+
+![Experiment procedure with the trial loop.](Images/Fig2_2_1.png){#fig-trials fig-align="center"}
+
 
 ## Materials & Stimuli {#sec-mat-stim}
 We have 64 audio stimuli in total with two matching visual stimuli versions, one consisting of four regular images and the other with four GIFs. 
@@ -21,8 +20,10 @@ We came up with the 64 different sentences by following the described structure 
 For the visual stimuli we re-used most of the images from the visual world paradigm tutorial by OpenSesame [^2] and looked for additional ones using Google images. 
 
 The stimuli creation process turned out to be a cumbersome process with handling the text-to-speech tool to include breaks and not speak too fast, finding visual stimuli to go with the audios and making sure that there is only one matching target sub-stimuli for each sentence. With our amount of stimuli, it is easy to lose sight of all the different sub-images. Therefore, to make the stimuli creation process easier, we used a central excel sheet as documentation where all the sentences and their corresponding sub-stimuli file names were stated, including which stimuli version (static or motion) will be shown for each condition group. In case something changed, we only had to change the central document and paste its contents to our trial loop in OpenSesame. 
-In the following we provide some stimuli examples: 
-![Figure 2.3.1](Images/Fig2_3_1.png)
+In @fig-stimuli we provide some stimuli examples: 
+
+![Two example sentences that we used in the experiment and their respective static and motion visual stimuli.](Images/Fig2_3_1.png){#fig-stimuli fig-align="center"}
+
 
 [^1]: https://www.acoust.io/
 

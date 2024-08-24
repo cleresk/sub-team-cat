@@ -1,1 +1,15 @@
-TODO
+In the following we present the results of our conducted experiment. We collected mainly quantitative data by recording the gaze of our participants, but we extended it with qualitative data by keeping lab notes for each participant to have more context for salient gaze behavior.
+
+
+## Participants
+
+We had 10 people participating in our experiment between the ages 18 and 34 where nine people identified as male and one as female. Regarding their English level, most (6) people specified that they have reached at least a C1 level and the remaining (4) people were at a B2 level. Additionally, we asked the participants about their previous experience with eye-tracking. For the majority (7) it was the first time using eye-trackers, the other three stated that they have used eye-trackers before.
+
+Overall, all the participants were able to complete the experiment successfully without significant complications.
+
+## Pilot Data
+show scanpath visualizations + heatmap
+
+The initial data visualizations with the pilot data gave us a first impression of the data we were about to collect and provided us a semantic santiy check, whether our experiment design is actually suitable for the research question we had in mind. The visualizations additionally gave us valuable feedback on the technical implementation of the experiment. Through the visualization we decided to remove the fixation dot in the middle of the screen when the stimuli are visible, since it inadverently directed the participant's gaze to some extend. 
+
+## Gaze on Target Behavior

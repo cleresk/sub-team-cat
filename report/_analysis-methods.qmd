@@ -1,4 +1,4 @@
-This chapter shows how data was gathered, preprocessed and analyzed in order to answer the research question. The analysis was performed in Python 3.12.4 [^5] with the use of the libraries Pandas [^6] and NumPy [^7] for data manipulation and analysis as well as Matplotlib [^8] and Seaborn [^9] for visualisations. The resulting scripts are Jupyter Notebooks and a Python script that depending on the filename can be run for a single subject _(e.g. analysis-subjects.ipynb)_ or for all the subjects _(e.g. analysis-global.ipynb)_. 
+This chapter shows how data was gathered, preprocessed and analyzed in order to answer the research question. The analysis was performed in Python 3.12.4 [^5] with the use of the libraries Pandas [^6] and NumPy [^7] for data manipulation and analysis as well as Matplotlib [^8] and Seaborn [^9] for visualizations. The resulting scripts are Jupyter Notebooks and a Python script that, depending on the filename, can be run for a single subject _(e.g. analysis-subjects.ipynb)_ or for all the subjects _(e.g. analysis-global.ipynb)_. 
 
 [^5]: https://www.python.org/downloads/release/python-3124/
 [^6]: https://pypi.org/project/pandas/
@@ -8,13 +8,13 @@ This chapter shows how data was gathered, preprocessed and analyzed in order to 
 
 ## Gathering data / logging {#sec-logging}
 
-In order to calibrate, record and log the gaze data in OpenSesame, we used several built-in pygaze elements. I.e. the the pygaze_init element befor the trial loop in order to perform the calibration. Pygaze_start_recording at the beginning of a trial followed by a logger and a pygaze_stop_recording at the end of a trial. <br>
+In order to calibrate, record and log the gaze data in OpenSesame, we used several built-in pygaze elements. For instance, the *pygaze_init* element is placed before the trial loop in order to perform the calibration. Other elements include the *pygaze_start_recording* placed at the beginning of a trial followed by a logger and a *pygaze_stop_recording* at the end of a trial. <br>
 
-It is essential to record the occurence of specific events during the experiment, as these will be subject to subsequent analysis. This is achieved by custom logging with the logger item in OpenSesame. The structure of a custom log is always consistent. It comprises a string containing all the information from the current row in the stimuli table. The string is formated so that each cell of the row is logged as key-value pair and divided by a semicolon. 
+It is essential to record the occurence of specific events during the experiment, as these will be subject to our subsequent analysis. This is achieved by custom logging with the logger item in OpenSesame. The structure of a custom log is always consistent. It comprises of a string containing all the information from the current row in the stimuli table. The string is formated in a way that each cell of the row is logged as key-value pair and divided by a semicolon. 
 
 > VAR TRIAL_LOG VERB_CUE=EAT;GROUP=CHICKEN;SENTENCE_ID=11; SENTENCE=AT THE FARM, THE GIRL FED THE CHICKEN. ; (...)
 
-In order to facilitate the differentiation of the current event, a key-value pair is appended to the logstring. Four potential events are logged within the experiment, as follows: 
+In order to facilitate the differentiation of the current event, a key-value pair is appended to the log string. Four potential events are logged within the experiment, as follows: 
 
 * Fixation: This event is logged at the beginning of a trial, when the participant is presented the fixation dot on the screen.
 * Preview: Stimuli are presented. 
@@ -84,7 +84,7 @@ logs = pd.DataFrame({"count": count, "expected": expected_logs}, index=log_index
 
 ```
 
-By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one dimensional) interpolator (see @fig-interp-code). The time was reorganized so that it matches the sampling rate. Since the eye tracker has a sampling rate of 150hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGY at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. In order to have a correct logging, the events were mapped back to the nearest interpolated time. <br>
+By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one dimensional) interpolator (see @fig-interp-code). The time was reorganized in a way that it matches the sampling rate. Since the eye-tracker has a sampling rate of 150 Hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGV at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br>
 
 ```{python}
 #| label: fig-interp-code
@@ -127,10 +127,9 @@ for index, row in before_interpol_data.iterrows():
         data.at[nearest_index, "USER"] = row["USER"]
 ```
 
-Figure @fig-interpolation shows an example function before and after interpolation:
+@fig-interpolation shows an example function before and after interpolation:
 
-![BPOGX, BPOGY and the time bins before and after interpolation](Images/Fig3_2_1.png){#fig-interpolation fig-align="center"}
-
+![Interpolation](Images/Fig3_2_1.png){#fig-interpolation fig-align="center"}
 
 In the next step the custom logs were decoded. In this process, the rows of the dataframe containing a *TRIAL_LOG* in the *USER* column were filtered and the logsting was decoded. Therefore all key-value pairs were split and for each key a new column was created. The respective value was placed in the current row of the key-column. Afterwards, the *USER* column was dropped. A row that contained a log looks for example like that:
 
