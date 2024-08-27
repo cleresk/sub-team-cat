@@ -14,3 +14,26 @@ The initial data visualizations with the pilot data gave us a first impression o
 ![Visualized pilot data including sub-stimuli with fixdot](Images/Fig9_8_7.png){#fig-pilot fig-align="center"} 
 
 ## Gaze on Target Behavior
+
+| Metric             | Global | Wolf  | Chicken |
+|:------------------:|:------:|:-----:|:-------:|
+| Mean TR (static)   | 0.594  | 0.625 | 0.562   |
+| Mean TR (motion)   | 0.559  | 0.6   | 0.519   |
+| Mean NTR (static)  | 0.275  | 0.194 | 0.356   |
+| Mean NTR (motion)  | 0.353  | 0.275 | 0.431   |
+| Stdev TR (static)  | 0.367  | 0.492 | 0.225   |
+| Stdev TR (motion)  | 0.273  | 0.374 | 0.185   |
+| Stdev NTR (static) | 0.174  | 0.187 | 0.111   |
+| Stdev NTR (motion) | 0.197  | 0.194 | 0.166   |
+
+
+![Boxplot diagrams of our main metrics for both static and motion conditions](Images/4-analysis-boxplot-tr-and-ntr.png){#fig-pilot fig-align="center"} 
+
+- Global results eingehen
+
+
+Furthermore, we split the analysis up to our two participant groups to check, if we obtain noticeable differences in the data.
+Figure (TODO) shows the boxplots for our two main metrics for both participant groups. The results show, that there is a larger standard deviation in the static condition in group "Wolf" compared to group "Chicken". However, we can still identify the same trend that we saw in the global analysis, which is that the static conditon performs slightly better than the motion condtion.
+Another thing to note here is that we only have five participants in each group, meaning that these statistical analyses are more sensitive to outliers. 
+
+

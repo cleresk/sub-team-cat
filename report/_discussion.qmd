@@ -6,12 +6,43 @@ How do the findings relate to the literature?
 
 Limitations
 
-Unlike the previously referenced work, we did not conduct the study with native speakers of the English language. 
 
 Challenges during project
 
-Include open-ended questions for qualitative data to put gaze data more into context
+
+
+
+Our results show that our participants did look at related objects in the visual stimuli before hearing it in a sentence, by infering from previous parts of the sentence, such as the verb or the real-world context they appear in. This anticipation effect was more visible in the static condition data, which was set up similarly to previous work by @altmann_incremental_1999. The second motion condition, altough showing lower results compared to the static one, indicate that the participants still made anticipatory eye movements before hearing the target word at the end of the sentence. The added movement in the stimuli might be a distracting factor which lowered the anticipation effect, but due to our small effect size, we cannot claim this assumption with high confidence.
+Another limiting factor to our study is unlike the previously referenced work, we did not conduct the study with native speakers of the English language. Altering the stimuli to be in German would introduce a series of new questions we would need to ask ourselves regarding the stimuli design, and due to the limited scope of this course, we decided to keep the study design as simple as possible and orientied it by our previously referenced work. 
+
+Adding to our list of limitations, we did not collect much qualitative data in our study. Including open-ended questions in our questionnaire at the end might have helped to put the gaze data of our participants more into context and potentially collect feedback on the experiment design overall. 
+
+
+
+We observed some of our participants getting bored during the experiment, either they told us or they started fidgeting more during the trials seeming impatient. This indicates that we should plan a short break halfway through the trials, since the participants might not feel the need to speak up about needing a short break. 
+
+
 
 ## Outlook/ improvements / Lessons learned
 
-We observed some of our participants getting bored during the experiment, either they told us or they started fidgeting more during the trials seeming impatient. This indicates that we should plan a short break halfway through the trials, since the participants might not feel the need to speak up about needing a short break. 
+In conclusion, we...
+
+
+What we have learned during this project...
+- how challenging stimuli design is
+- 
+
+
+In the following, we propose related key topics to be adressed in the future:
+...
+- Conduct the experiment in more "lab-like" conditions e.g. more uniform stimuli, having native speakers of the language used in the study as participants, overall more participants to obtain more robust results
+
+- do people still make predicting eye movements when target is static and distractors are moving?
+
+- how about when target is moving and distractors are static? How to mix these conditions?
+
+
+
+
+
+
