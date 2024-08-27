@@ -24,5 +24,5 @@ The introduction of motion provides a new dimension to understanding the interac
 Building upon the results of @altmann_incremental_1999, which suggested that sentence processing is driven by predictive relationships between verbs and objects, our study aims to extend this understanding by introducing moving stimuli into the experimental setup. Specifically, we propose our research question:
 
 
-<p style="text-align: center;">*Do people still make anticipatory eye movements when presented with images that are in motion instead of static ones?*</p>
+<p style="text-align: center;">*Do people still make anticipatory eye movements <br> when presented with images that are in motion instead of static ones?*</p>
 This question is grounded in the idea that while humans are naturally inclined to focus on moving objects @abrams_motion_2003, the extent to which this influences the predictive power of verbs during sentence processing remains unknown. We hypothesize that the addition of motion might modulate the anticipatory eye movements either by introducing competing visual stimuli that might disrupt the prediction.
