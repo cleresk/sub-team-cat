@@ -217,7 +217,7 @@ for index, row in audio_start_data.iterrows():
 
 
 ```
-
+<!--
 In order to work better with pandas queries, the logs were expanded. That means, that we iterate over all custom logs that were added during this process so far and copy them to the next empty row. If the next row is not empty, the data of the next row gets copied to the next but one row. This process looks like the following:
 
 ```
@@ -256,7 +256,7 @@ for index, row in data.iterrows():
             data.at[index, field] = data.at[index-1, field]
 
 ```
-
+-->
 Finally the format of rows that contained mixed characters was unified and the resulting dataframe as exported into a csv file under the _~/data/preprocessed/_ directory. 
 
 ```{python}
@@ -341,10 +341,10 @@ def bpog_in_target_bbox(bpogx, bpogy, pos):
 With the area of interest fixation algorthmen, we can now have a look at the two metrics of this experiment. The target ratio and the non-target ratio. The target ratio describes the samples that were detected inside the target area of interest in relation to the total amount of examples. The non-target ratio describes the samples that were detected in all other areas of interest except the target aoi in relation to the total samples.
 
 $$
-TR = \frac{Samples  on  target  AOI}{Total  samples}
+TR = \frac{\text{Samples on target AOI}}{\text{Total samples}}
 $$
 $$
-NTR = \frac{Samples  on  non-target  AOIs}{Total  samples}
+NTR = \frac{\text{Samples on non-target AOIs}}{\text{Total samples}}
 $$
 
 With this two introduced metrics, a variety of interesting analysis and visualisations is possible. The target and non-target ratio can be looked at for an individual subject and sentence with a specific condition (see @fig-trntrstatic). 
