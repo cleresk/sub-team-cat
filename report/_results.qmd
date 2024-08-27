@@ -8,8 +8,9 @@ We had 10 people participating in our experiment between the ages 18 and 34 wher
 Overall, all the participants were able to complete the experiment successfully without significant complications.
 
 ## Pilot Data
-show scanpath visualizations + heatmap
 
 The initial data visualizations with the pilot data gave us a first impression of the data we were about to collect and provided us a semantic santiy check, whether our experiment design is actually suitable for the research question we had in mind. The visualizations additionally gave us valuable feedback on the technical implementation of the experiment. Through the visualization we decided to remove the fixation dot in the middle of the screen when the stimuli are visible, since it inadverently directed the participant's gaze to some extend. 
+
+![Visualized pilot data including sub-stimuli with fixdot](Images/Fig9_8_7.png){#fig-pilot fig-align="center"} 
 
 ## Gaze on Target Behavior

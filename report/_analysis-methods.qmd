@@ -88,7 +88,7 @@ By plotting a histogram of the time delta between samples, we found out, that it
 
 ```{python}
 #| label: fig-interp-code
-#| fig-cap: "Interpolation"
+#| fig-cap: "Linear interpolation of BPOGX, BPOGY and BPOGV"
 #| eval: false
 
 # (...)
@@ -357,6 +357,6 @@ Another interesting insight is the average tr and ntr over all subjects for one 
 
 Our goal is to compare the target ratio and non-target ratio for sentences with the static condition to the sentences with the motion condition. The TR and NTR are measured exactly 50 miliseconds before the *TARGETONSET* event and thereby before the target word is said. Since its only one measure point the TR and NTR for a single sentence can be 1 or 0. For each subject the average target and non-target ratio for all sentences with the static condition *tr(static)* and motion condition *tr(motion)* is calculated. <br>
 
-With the resulting metrics for each subjects, the total average, mean, standard deviation is calculated, visuaized in a boxplot and interpreted. <br>
+With the resulting metrics for each subjects, the total average, mean and standard deviation is calculated, visualized in a boxplot and interpreted. <br>
 
 The scripts to calculate all metrics mentioned above can be found in the project folder under *~/scripts/*.
