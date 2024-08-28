@@ -22,7 +22,8 @@
 |
 ├── presentation     <- Final presentation slides (PDF and PPTX-format)
 |
-├── _research        <- WIP scripts, code, notes, comments,
+├── _research        <- Literatue research, important papers, 
+|   					WIP scripts, code, notes, comments,
 │                       to-dos and anything in a preliminary state.
 │
 ├── plots            <- All exported global and subejct specific plots. All plots can be 
