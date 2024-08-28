@@ -26,14 +26,19 @@ The initial data visualizations with the pilot data gave us a first impression o
 | Stdev NTR (static) | 0.174  | 0.187 | 0.111   |
 | Stdev NTR (motion) | 0.197  | 0.194 | 0.166   |
 
+: Metric comparison between the participant groups and the complete data set (global) {#tbl-condition-group-comparison}
 
-![Boxplot diagrams of our main metrics for both static and motion conditions](Images/4-analysis-boxplot-tr-and-ntr.png){#fig-pilot fig-align="center"} 
+![Boxplot diagrams of our main metrics for both static and motion conditions](Images/4-analysis-boxplot-tr-and-ntr.png){#fig-boxplot-global fig-align="center"} 
+
+![Boxplot diagrams of our main metrics for both static and motion conditions for the participant group chicken](Images/4-analysis-boxplot-chicken-tr-and-ntr.png){#fig-boxplot-chicken fig-align="center"} 
+
+![Boxplot diagrams of our main metrics for both static and motion conditions group wolf](Images/4-analysis-boxplot-wolf-tr-and-ntr.png){#fig-boxplot-wolf fig-align="center"} 
 
 - Global results eingehen
 
 
 Furthermore, we split the analysis up to our two participant groups to check, if we obtain noticeable differences in the data.
-Figure (TODO) shows the boxplots for our two main metrics for both participant groups. The results show, that there is a larger standard deviation in the static condition in group "Wolf" compared to group "Chicken". However, we can still identify the same trend that we saw in the global analysis, which is that the static conditon performs slightly better than the motion condtion.
+The data is listed in @tbl-condition-group-comparison and visualized as boxplots in @fig-boxplot-chicken and @fig-boxplot-wolf. The results indicate, that there is a larger standard deviation in the static condition in group wolf compared to group chicken. However, we can still identify the same trend that we saw in the global analysis, which is that the static conditon performs slightly better (higher target rate) than the motion condtion.
 Another thing to note here is that we only have five participants in each group, meaning that these statistical analyses are more sensitive to outliers. 
 
 

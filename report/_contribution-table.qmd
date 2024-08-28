@@ -6,13 +6,13 @@ The following table gives a detailed insight on how the workload of this project
 |   Experiment Design           |        |    x      |          |
 |   Experiment Implementation   |        |           |    x     |
 |   Stimulus and audio design   |  x     |           |          |
-|   Piloting                    |  x     |    x      |    x     |
-|   Pilot plots                 |        |    x      |    x     |
+|   Piloting                    |        |    x      |    x     |
+|   Pilot plots                 |        |           |    x     |
 |   Data-Recording              |  o     |    x      |    x     |
 |   Data Analysis Scripts       |        |           |    x     |
-|   Report Writing              |  x     |    x      |    o     |
+|   Report Writing              |  o     |    x      |    o     |
 |   Report Lectorate            |  x     |           |          |
-|   Participant Acquisition     |  x     |     x     |    x     |
+|   Participant Acquisition     |  x     |    x      |    x     |
 |   Project Management          |        |    x      |          |
 
 Legend: x = main, o = supporter
