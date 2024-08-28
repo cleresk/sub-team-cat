@@ -33,7 +33,7 @@ format:
     documentclass: scrreprt
     header-includes:
       - \usepackage{setspace}
-      - \onehalf
+      - \onehalfspacing
     papersize: letter 
     fontsize: 12pt
 jupyter: python3
