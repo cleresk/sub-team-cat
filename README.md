@@ -6,53 +6,44 @@
 **Semester:** *Summer semester 2024*
 
 ## Project Description
-> Please provide a short description of the main goals. 
+> Investigating predictive eye movements for static and moving stimuli.
 
 ## Instruction for a new student
->If a fellow student wants to reproduce all your results. What scripts, in which order, with which data need to be run?
+> To gain a comprehensive understanding of the project, we recommend you to review the presentation PDF, located at _~/presentation_, which provides an overview of the project's objectives and methodology. Afterwards we recommend you to read th report under _~/report_ which additionally presents the findings and final conclusions of this project.  
 >
->Be as specific as possible.
->
->Optional: Add a pipeline plot in which the different steps are displayed together with the corresponding scripts.
+> If you want to run the OpenSesame experiment, please navigate into the _~/experiment_ folder and read the README.md file, which contains detailed instructions on how to proceed to run the experiment.
 
 ## Overview of Folder Structure 
 
 ```
-│projectdir          <- Project's main folder. It is initialized as a Git
-│                       repository with a reasonable .gitignore file.
+│sub-team-cat (~)    <- Project's main folder.
 │
-├── report           <- Report PDF
+├── report           <- Report HTML and PDF, **we recommend the HTML document**
 |
-├── presentation     <- Final presentation slides (PDFs; optionally also .pptx etc)
+├── presentation     <- Final presentation slides (PDF and PPTX-format)
 |
 ├── _research        <- WIP scripts, code, notes, comments,
 │                       to-dos and anything in a preliminary state.
 │
-├── plots            <- All exported plots go here, best in date folders.
-|                       Note that to ensure reproducibility it is required that all plots can be
+├── plots            <- All exported global and subejct specific plots. All plots can be 
 |                       recreated using the plotting scripts in the scripts folder.
 │
-├── scripts          <- Various scripts, e.g. analysis and plotting.
-│                       The scripts use the `src` folder for their base code.
+├── scripts          <- Preprocessing and analysis scripts as Jupyter Notebooks.
 │
-├── src              <- Source code for use in this project. Contains functions,
-│                       structures and modules that are used throughout
-│                       the project and in multiple scripts.
-│
-├── experiment       <- OpenSesame file to run the experiment; where applicable also stimuli, randomization
+├── experiment       <- OpenSesame file to run the experiment with audio & visual stimuli. 
 |
-├── data             <- **If they have a reasonable file size**
+├── data             
 |   ├── raw          <- Raw eye-tracking data
 |   ├── preprocessed <- Data resulting from preprocessing
 |
-├── README.md        <- Top-level README. Fellow students need to be able to
-|                       reproduce your project. Think about them!
+├── stimuli          <- All possible stimuli during the experiment, used for plotting.
+|                       Stimuli table.
 |
-├── .gitignore       <- List of files that you don’t want Git to automatically add
-|                       (default Python .gitignore was used)
+├── study_materials  <- Lab notes, consent and data privacy forms;   
+|   ├── lab_notes    <- Obeservations during the experiments.
+|
+├── README.md        <- Top-level README for reproducability.
 │
-└── (requirements.txt)<- List of modules and packages that are used for your project
+└── requirements.txt <- List of modules and packages that are used for this project
                      
 ```
-## Note on sharing your recorded data
-If your data is <1GB you can add it to the data folder in your Git repository. Otherwise, only include it in the project package that you submit on Ilias at the end of the term.
