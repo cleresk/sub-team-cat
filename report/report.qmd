@@ -26,10 +26,16 @@ format:
     code-block-border-left: "#31BAE9"
   pdf:
     toc: true
+    toc-depth: 2
+    toc-title: Contents 
     number-sections: true
     colorlinks: true
-    documentclass: scrartcl
+    documentclass: scrreprt
+    header-includes:
+      - \usepackage{setspace}
+      - \onehalf
     papersize: letter 
+    fontsize: 12pt
 jupyter: python3
 ---
 

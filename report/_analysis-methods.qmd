@@ -24,11 +24,11 @@ In order to facilitate the differentiation of the current event, a key-value pai
 The subsequent analysis contains two more events which could not be logged in OpenSesame due to its design. Our solution to this problem will be presented in the next chapter.   
 
 ## Preprocessing and quality control {#sec-pre-quality}
-<!-- hier vllt noch sagen, dass das preprocessing jeweils nur für ein subject möglich ist -->
-At the beginning, we filtered out the data that was irrelevant for this research. The dropped columns can be seen in @fig-del:
+
+At the beginning, we filtered out the data that was irrelevant for this research. The dropped columns can be seen in @lst-del:
 
 ```{python}
-#| label: fig-del
+#| label: lst-del
 #| fig-cap: "Filtering of irrelevant data"
 #| eval: false
 
@@ -49,14 +49,16 @@ The resulting Dataframe looks like this:
 |:------:|:------:|:------:|:------:|:------:|
 | 204.69383 | 0.33433 | 0.57871 | 1 | START_TRIAL 0 | 
 
+: Filtered raw gaze data of a participant {#tbl-a}
+
 Resulting data and its interpretation can be found in the GazePoint API documentation [^10] and forms the basis for the analysis. <br>
 
-At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the *TRIAL_WARNING* that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot (see @fig-barplt-evts and @fig-barplot-events). <br>
+At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the *TRIAL_WARNING* that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot (see @fig-barplt-evts and @lst-barplot-events). <br>
 
 ![Counted vs. expected logs for an example subject](Images/Fig3_2_0.png){#fig-barplt-evts fig-align="center"}
 
 ```{python}
-#| label: fig-barplot-events
+#| label: lst-barplot-events
 #| fig-cap: "Counted vs. expected logs for one subject"
 #| eval: false
 
@@ -84,10 +86,10 @@ logs = pd.DataFrame({"count": count, "expected": expected_logs}, index=log_index
 
 ```
 
-By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one dimensional) interpolator (see @fig-interp-code). The time was reorganized in a way that it matches the sampling rate. Since the eye-tracker has a sampling rate of 150 Hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGV at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br>
+By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one dimensional) interpolator (see @lst-interp-code). The time was reorganized in a way that it matches the sampling rate. Since the eye-tracker has a sampling rate of 150 Hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGV at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br>
 
 ```{python}
-#| label: fig-interp-code
+#| label: lst-interp-code
 #| fig-cap: "Linear interpolation of BPOGX, BPOGY and BPOGV"
 #| eval: false
 
@@ -137,8 +139,10 @@ In the next step the custom logs were decoded. In this process, the rows of the 
 |:------------------:|:----------------:|:------------------:|:----:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 | 1487.3... | (...) | 1    | 3 | FIXATION | 0 | WOLF | (...) | SERVED | 2115 |
 
+: Decoded custom logs in dataframe with gaze data {#tbl-b}
+
 ```{python}
-#| label: fig-cust-log-dec
+#| label: lst-cust-log-dec
 #| fig-cap: "Custom log decoding"
 #| eval: false
 
@@ -187,13 +191,13 @@ As mentioned in @sec-logging, two events can not be logged due to the design of 
 ![Connection between event cues AUDIOSTART, VERB- and TARGETONSET](Images/Fig3_2_2.png){#fig-verbtargetonset fig-align="center"}
 
 ```{python}
-#| label: fig-cust-calc-verb-taget-onset
-#| fig-cap: "Custom log decoding"
+#| label: lst-cust-calc-verb-taget-onset
+#| fig-cap: "Determination of VERB- AND TARGETONSET event"
 #| eval: false
 
 # extend logs with the corresponding events
 audio_start_data = data.query("EVENT=='AUDIOSTART'")
-print(len(audio_start_data))
+
 for index, row in audio_start_data.iterrows():
     
     sample_time = float(row["TIME"])
@@ -260,8 +264,8 @@ for index, row in data.iterrows():
 Finally the format of rows that contained mixed characters was unified and the resulting dataframe as exported into a csv file under the _~/data/preprocessed/_ directory. 
 
 ```{python}
-#| label: fig-format-check
-#| fig-cap: "Custom log decoding"
+#| label: lst-format-check
+#| fig-cap: "Removal of heterogeneous data types"
 #| eval: false
 
 data["SUBJECT"] = data["SUBJECT"].fillna(0).astype(int)
@@ -295,10 +299,10 @@ When considering saccades, several variations of this metric might be interestin
 
 Conversely, fixations provide a more straightforward metric. In this study, we are not interested in the duration of fixations or the precise location of the gaze point. Instead, the primary focus is on determining whether the participant is looking at a specific target. Given this requirement, we chose not to analyze fixations directly. Instead, we opted to use the samples from the eye tracker. These samples are more robust and less noisy since they do not need to undergo a fixation detection algorithm, which can create additional noise. <br>
 
-Given the need to accurately detect the specific sub-stimulus at which a participant is looking, four areas of interest were defined. These AOIs correspond to the locations of each sub-stimulus and are slightly larger (350 pixels) than the resolution of each sub-stimulus (300 pixels). This setup results in four AOIs: top-left (TL), top-right (TR), bottom-left (BL), and bottom-right (BR). The center of each AOI corresponds to the relative position of each sub-stimulus to the middle. For example the center top-left AOI is 1/4 of the width and 1/4 of the height. An algorithm was implemented that considers the center positions and calculate two intervals where the BPOGX and BPOGY of a sample need to be located in order to be considered inside the bounding box (see @fig-alg-aoi). Since our metrics base on the AOIs, the algorithm was tested with additional visualisations (see @fig-aoi-valid) and could be used in the further course of the analysis.
+Given the need to accurately detect the specific sub-stimulus at which a participant is looking, four areas of interest were defined. These AOIs correspond to the locations of each sub-stimulus and are slightly larger (350 pixels) than the resolution of each sub-stimulus (300 pixels). This setup results in four AOIs: top-left (TL), top-right (TR), bottom-left (BL), and bottom-right (BR). The center of each AOI corresponds to the relative position of each sub-stimulus to the middle. For example the center top-left AOI is 1/4 of the width and 1/4 of the height. An algorithm was implemented that considers the center positions and calculate two intervals where the BPOGX and BPOGY of a sample need to be located in order to be considered inside the bounding box (see @lst-alg-aoi). Since our metrics base on the AOIs, the algorithm was tested with additional visualisations (see @fig-aoi-valid) and could be used in the further course of the analysis.
 
 ```{python}
-#| label: fig-alg-aoi
+#| label: lst-alg-aoi
 #| fig-cap: "Area of interest detection algorithm"
 #| eval: false
 
