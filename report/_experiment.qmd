@@ -43,7 +43,7 @@ When starting the experiment in OpenSesame, it starts out with initializing the 
 After the setup, the experiment itself lasted around 12 to 15 minutes. The participants had the control to proceed to the next trial in their own speed and they were informed, that they can take breaks in-between trials, if needed. 
 Finally, we asked the participants some basic demographic information and their previous experiences with eye-tracking. We placed the demographic survey at the end of the experiment to avoid stereotype threat (see @spencer2016stereotype).
 
-## Implementation
+## Implementation {#sec-impl}
 
 The experiment was conducted using the most recent version of OpenSesame 4.0 Melodramatic Milgram with the PyGame backend. The logic is divided into three distinct logical units. <br>
 In the first unit is used to load custom configuration and preprocess static and motion stimuli. The config-file was managed with the YAML parser and emitter PyYAML [^3] and used to customize texts, their layouts and positions, fixation dots, positions of stimuli as well as the general timing of the expermient. This way we kept the experiment flexible for minor changes during the pilot studies or possible future research. Since it was not possible to display videos or gifs in OpenSesame, we used the Python library OpenCV [^4] to extract the frames of each mp4-Videofile and save them into a separate folder for each stimulus inside a temporary directory. This directory can be specified in the custom config File, stated above. <br>

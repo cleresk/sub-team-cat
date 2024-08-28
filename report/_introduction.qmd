@@ -25,4 +25,4 @@ Building upon the results of @altmann_incremental_1999, which suggested that sen
 
 
 <p style="text-align: center;">*Do people still make anticipatory eye movements <br> when presented with images that are in motion instead of static ones?*</p>
-This question is grounded in the idea that while humans are naturally inclined to focus on moving objects @abrams_motion_2003, the extent to which this influences the predictive power of verbs during sentence processing remains unknown. We hypothesize that the addition of motion might modulate the anticipatory eye movements either by introducing competing visual stimuli that might disrupt the prediction.
+This question is grounded in the idea that while humans are naturally inclined to focus on moving objects @abrams_motion_2003, the extent to which this influences the predictive power of verbs during sentence processing remains unknown. We hypothesize that the addition of motion might modulate the anticipatory eye movements by introducing competing visual stimuli that might disrupt the prediction.
