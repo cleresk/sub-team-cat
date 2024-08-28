@@ -20,7 +20,7 @@ We want to build on top of the foundational work of Altmann & Kamide, by aiming 
 
 The introduction of motion provides a new dimension to understanding the interaction between linguistic information and visual attention. While previous studies have shown that static images paired with predictive verbs can direct gaze, it remains unclear how motion in the visual scene impacts this process. 
 
-## Research Question / Hypothesis
+## Research Question
 Building upon the results of @altmann_incremental_1999, which suggested that sentence processing is driven by predictive relationships between verbs and objects, our study aims to extend this understanding by introducing moving stimuli into the experimental setup. Specifically, we propose our research question:
 
 

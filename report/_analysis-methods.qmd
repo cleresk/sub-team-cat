@@ -6,7 +6,7 @@ This chapter shows how data was gathered, preprocessed and analyzed in order to 
 [^8]: https://pypi.org/project/matplotlib/
 [^9]: https://pypi.org/project/seaborn/
 
-## Gathering data / logging {#sec-logging}
+## Gathering Data & Logging {#sec-logging}
 
 In order to calibrate, record and log the gaze data in OpenSesame, we used several built-in pygaze elements. For instance, the *pygaze_init* element is placed before the trial loop in order to perform the calibration. Other elements include the *pygaze_start_recording* placed at the beginning of a trial followed by a logger and a *pygaze_stop_recording* at the end of a trial. <br>
 
@@ -23,7 +23,7 @@ In order to facilitate the differentiation of the current event, a key-value pai
 
 The subsequent analysis contains two more events which could not be logged in OpenSesame due to its design. Our solution to this problem will be presented in the next chapter.   
 
-## Preprocessing and quality control {#sec-pre-quality}
+## Preprocessing & Quality Control {#sec-pre-quality}
 
 At the beginning, we filtered out the data that was irrelevant for this research. The dropped columns can be seen in @lst-del:
 
@@ -280,7 +280,7 @@ This concludes the @sec-pre-quality chapter. The full script for the preprocessi
 [^11]: https://pypi.org/project/scipy/
 [^12]: Can be found in the project folder under ~/stimuli/0-stimuli-table.xlsx
 
-## Measurements, Metrics and Visualisations
+## Measurements, Metrics & Visualisations
 
 
 To verify the correctness, consistency and accuracy of the data collected, especially during the piloting trials, several visualizations were employed. The first one being visualization of the BPOGX and BPOGY coordinates was generated (see Fig. @fig-bpogxy). This plot illustrated the raw gaze points captured by the eye tracker across the screen. 

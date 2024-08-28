@@ -31,7 +31,7 @@ In @fig-stimuli we provide some stimuli examples:
 
 
 
-## Study Procedure and Apparatus {#sec-stdy-proc}
+## Study Procedure & Apparatus {#sec-stdy-proc}
 To test our hypothesis, we needed to invite participants to partake in our experiment. <br>
 We recruited participants by asking for volunteers in our circle of acquaintances and invited the interested people between mid-July and August. Our target sample size was at least ten participants to end up with at least five people per condition group.
 Once a participant arrived, they were given an information sheet with a brief description of the experiment, what kind of devices are going to get used and their corresponding safety risks. Additionally, they were asked to sign a standard consent form for studies with humans that are conducted at the university. 
