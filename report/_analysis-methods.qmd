@@ -10,22 +10,22 @@ This chapter shows how data was gathered, preprocessed and analyzed in order to 
 
 In order to calibrate, record and log the gaze data in OpenSesame, we used several built-in pygaze elements. For instance, the *pygaze_init* element is placed before the trial loop in order to perform the calibration. Other elements include the *pygaze_start_recording* placed at the beginning of a trial followed by a logger and a *pygaze_stop_recording* at the end of a trial. <br>
 
-It is essential to record the occurence of specific events during the experiment, as these will be subject to our subsequent analysis. This is achieved by custom logging with the logger item in OpenSesame. The structure of a custom log is always consistent. It comprises of a string containing all the information from the current row in the stimuli table. The string is formated in a way that each cell of the row is logged as key-value pair and divided by a semicolon. 
+It is essential to record the occurrence of specific events during the experiment, as these will be subject to our subsequent analysis. This is achieved by custom logging with the logger item in OpenSesame. The structure of a custom log is always consistent. It comprises a string containing all the information from the current row in the stimuli table. The string is formatted in a way that each cell of the row is logged as a key-value pair and divided by a semicolon. 
 
 > VAR TRIAL_LOG VERB_CUE=EAT;GROUP=CHICKEN;SENTENCE_ID=11; SENTENCE=AT THE FARM, THE GIRL FED THE CHICKEN. ; (...)
 
 In order to facilitate the differentiation of the current event, a key-value pair is appended to the log string. Four potential events are logged within the experiment, as follows: 
 
-* Fixation: This event is logged at the beginning of a trial, when the participant is presented the fixation dot on the screen.
+* Fixation: This event is logged at the beginning of a trial when the participant is presented with the fixation dot on the screen.
 * Preview: Stimuli are presented. 
 * Audiostart: The audio with the sentence starts playing. 
-* Pause: The beginning of the pause, where the user has to look at the fixation dot in oder to continue.
+* Pause: The beginning of the pause, where the user has to look at the fixation dot in order to continue.
 
 The subsequent analysis contains two more events which could not be logged in OpenSesame due to its design. Our solution to this problem will be presented in the next chapter.   
 
 ## Preprocessing & Quality Control {#sec-pre-quality}
 
-At the beginning, we filtered out the data that was irrelevant for this research. The dropped columns can be seen in @lst-del:
+In the beginning, we filtered out the data that was irrelevant to this research. The dropped columns can be seen in @lst-del:
 
 ```{python}
 #| label: lst-del
@@ -51,9 +51,9 @@ The resulting Dataframe looks like this:
 
 : Filtered raw gaze data of a participant {#tbl-a}
 
-Resulting data and its interpretation can be found in the GazePoint API documentation [^10] and forms the basis for the analysis. <br>
+The resulting data and its interpretation can be found in the GazePoint API documentation [^10] and forms the basis for the analysis. <br>
 
-At the beginning several sanity checks were performed in order to evaluate the quality of the collected data. The first one being the examination on recorded logs. Therefor the occurencies of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the *TRIAL_WARNING* that is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards the results are plotted in a barplot (see @fig-barplt-evts and @lst-barplot-events). <br>
+At the beginning, several sanity checks were performed in order to evaluate the quality of the collected data. The first one is the examination of recorded logs. Therefore the occurrences of all existing logs in the USER column were counted. Since the experiment has 64 trials there should be 64 hits for each log message except the *TRIAL_WARNING* which is only logged when the subject does not fixate on the fixation dot during a pause for more than 15 seconds. Afterwards, the results are plotted in a barplot (see @fig-barplt-evts and @lst-barplot-events). <br>
 
 ![Counted vs. expected logs for an example subject](Images/Fig3_2_0.png){#fig-barplt-evts fig-align="center"}
 
@@ -86,7 +86,7 @@ logs = pd.DataFrame({"count": count, "expected": expected_logs}, index=log_index
 
 ```
 
-By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefor we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one dimensional) interpolator (see @lst-interp-code). The time was reorganized in a way that it matches the sampling rate. Since the eye-tracker has a sampling rate of 150 Hz, the total time of the experiment in seconds was multiplyed by 150 to figure out the amount of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGV at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br>
+By plotting a histogram of the time delta between samples, we found out, that it is not consistent. Therefore we interpolated the values of BPOGX, BPOGY, and BPOGV with the scipy [^11] linear (one- dimensional) interpolator (see @lst-interp-code). The time was reorganized in a way that it matches the sampling rate. Since the eye-tracker has a sampling rate of 150 Hz, the total time of the experiment in seconds was multiplied by 150 to figure out the number of bins for the interpolation function. The respective values for BPOGX, BPOGY and BPOGV at the location of each bin determined the interpolated value. In order to obtain a valid BPOGV, its value after interpolation was rounded to an integer value. <br>
 
 ```{python}
 #| label: lst-interp-code
@@ -133,7 +133,7 @@ for index, row in before_interpol_data.iterrows():
 
 ![Interpolation](Images/Fig3_2_1.png){#fig-interpolation fig-align="center"}
 
-In the next step the custom logs were decoded. In this process, the rows of the dataframe containing a *TRIAL_LOG* in the *USER* column were filtered and the logsting was decoded. Therefore all key-value pairs were split and for each key a new column was created. The respective value was placed in the current row of the key-column. Afterwards, the *USER* column was dropped. A row that contained a log looks for example like that:
+In the next step, the custom logs were decoded. In this process, the rows of the dataframe containing a *TRIAL_LOG* in the *USER* column were filtered and the logsting was decoded. Therefore all key-value pairs were split and for each key, a new column was created. The respective value was placed in the current row of the key-column. Afterwards, the *USER* column was dropped. A row that contained a log looks for example like that:
 
 | TIME               |  (...)|BPOGV | SUBJECT | EVENT | TRIAL | GROUP | (...) | VERB_CUE |	TARGET_CUE_TIMING|
 |:------------------:|:----------------:|:------------------:|:----:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -186,7 +186,7 @@ data.drop(columns=["USER"], inplace=True)
 
 ```
 
-As mentioned in @sec-logging, two events can not be logged due to the design of OpenSesame. These events are *VERBONSET* and *TARGETONSET*. *VERBONSET* refers to the time, when the sentence is played to the subject and the verb of the sentence is said. *TARGETONSET* is the exact timing where the target word of the sentence is spoken. The in @sec-mat-stim introduced stimuli-table [^12] also contains for each sentence the audio and the time that has passed until the verb and the target word is said. We consider this two time intervals as deltas. Afterwards we took the time were the *AUDIOSTART* event happened and added each time interval to the *AUDIOSTART*-time. The resulting times are the values *VERB- and TARGETONSET*.  @fig-verbtargetonset illustrates this process.   
+As mentioned in @sec-logging, two events can not be logged due to the design of OpenSesame. These events are *VERBONSET* and *TARGETONSET*. *VERBONSET* refers to the time when the sentence is played to the subject and the verb of the sentence is said. *TARGETONSET* is the exact timing where the target word of the sentence is spoken. @sec-mat-stim introduced stimuli-table [^12] also contains for each sentence the audio and the time that has passed until the verb and the target word are said. We consider these two time intervals as deltas. Afterwards, we took the time where the *AUDIOSTART* event happened and added each time interval to the *AUDIOSTART*-time. The resulting times are the values *VERB- and TARGETONSET*.  @fig-verbtargetonset illustrates this process.   
 
 ![Connection between event cues AUDIOSTART, VERB- and TARGETONSET](Images/Fig3_2_2.png){#fig-verbtargetonset fig-align="center"}
 
@@ -261,7 +261,7 @@ for index, row in data.iterrows():
 
 ```
 -->
-Finally the format of rows that contained mixed characters was unified and the resulting dataframe as exported into a csv file under the _~/data/preprocessed/_ directory. 
+Finally, the format of rows that contained mixed characters was unified and the resulting dataframe was exported into a csv file under the _~/data/preprocessed/_ directory. 
 
 ```{python}
 #| label: lst-format-check
@@ -283,11 +283,11 @@ This concludes the @sec-pre-quality chapter. The full script for the preprocessi
 ## Measurements, Metrics & Visualisations
 
 
-To verify the correctness, consistency and accuracy of the data collected, especially during the piloting trials, several visualizations were employed. The first one being visualization of the BPOGX and BPOGY coordinates was generated (see Fig. @fig-bpogxy). This plot illustrated the raw gaze points captured by the eye tracker across the screen. 
+To verify the correctness, consistency and accuracy of the data collected, especially during the piloting trials, several visualizations were employed. The first one is the visualization of the BPOGX and BPOGY coordinates generated (see Fig. @fig-bpogxy). This plot illustrated the raw gaze points captured by the eye tracker across the screen. 
 
 ![Example of best point of gaze for a sentence](Images/Fig4_4_0.png){#fig-bpogxy fig-align="center"}
 
-The scanpath visualization (see @fig-scanpath) was used to trace the path that a subjects eye-movements took to ensure alignment with the expected gaze patterns. The heatmaps (see @fig-heatmap) allowed quick verification of attention directed towards the defined areas of interest (AOI).
+The scanpath visualization (see @fig-scanpath) was used to trace the path that a subject's eye movements took to ensure alignment with the expected gaze patterns. The heatmaps (see @fig-heatmap) allowed quick verification of attention directed towards the defined areas of interest (AOI).
 
 ![Example scanpath for a sentence](Images/Fig4_4_1.png){#fig-scanpath fig-align="center"}
 
@@ -295,11 +295,11 @@ The scanpath visualization (see @fig-scanpath) was used to trace the path that a
 
 To determine whether a participant directed their gaze toward a target, two primary types of eye movements can be looked at: fixations and saccades. <br>
 
-When considering saccades, several variations of this metric might be interesting to see if the anticipation effect persist when adding motion stimuli. An example therefore would be the first saccade after the target word of a sentence is said. However, the inclusion of such a metric requires precise experimental timing and raises several methodological questions. For example, how should saccades that initiate immediately after the target cue be handled? Overall, saccades are not sufficiently robust for this analysis and introduce a lot of noise, making them impractical within the scope of this project. <br>
+When considering saccades, several variations of this metric might be interesting to see if the anticipation effect persists when adding motion stimuli. An example therefore would be the first saccade after the target word of a sentence is said. However, the inclusion of such a metric requires precise experimental timing and raises several methodological questions. For example, how should saccades that initiate immediately after the target cue be handled? Overall, saccades are not sufficiently robust for this analysis and introduce a lot of noise, making them impractical within the scope of this project. <br>
 
 Conversely, fixations provide a more straightforward metric. In this study, we are not interested in the duration of fixations or the precise location of the gaze point. Instead, the primary focus is on determining whether the participant is looking at a specific target. Given this requirement, we chose not to analyze fixations directly. Instead, we opted to use the samples from the eye tracker. These samples are more robust and less noisy since they do not need to undergo a fixation detection algorithm, which can create additional noise. <br>
 
-Given the need to accurately detect the specific sub-stimulus at which a participant is looking, four areas of interest were defined. These AOIs correspond to the locations of each sub-stimulus and are slightly larger (350 pixels) than the resolution of each sub-stimulus (300 pixels). This setup results in four AOIs: top-left (TL), top-right (TR), bottom-left (BL), and bottom-right (BR). The center of each AOI corresponds to the relative position of each sub-stimulus to the middle. For example the center top-left AOI is 1/4 of the width and 1/4 of the height. An algorithm was implemented that considers the center positions and calculate two intervals where the BPOGX and BPOGY of a sample need to be located in order to be considered inside the bounding box (see @lst-alg-aoi). Since our metrics base on the AOIs, the algorithm was tested with additional visualisations (see @fig-aoi-valid) and could be used in the further course of the analysis.
+Given the need to accurately detect the specific sub-stimulus at which a participant is looking, four areas of interest were defined. These AOIs correspond to the locations of each sub-stimulus and are slightly larger (350 pixels) than the resolution of each sub-stimulus (300 pixels). This setup results in four AOIs: top-left (TL), top-right (TR), bottom-left (BL), and bottom-right (BR). The center of each AOI corresponds to the relative position of each sub-stimulus to the middle. For example,  the center top-left AOI is 1/4 of the width and 1/4 of the height. An algorithm was implemented that considers the center positions and calculates two intervals where the BPOGX and BPOGY of a sample need to be located in order to be considered inside the bounding box (see @lst-alg-aoi). Since our metrics based on the AOIs, the algorithm was tested with additional visualisations (see @fig-aoi-valid) and could be used in the further course of the analysis.
 
 ```{python}
 #| label: lst-alg-aoi
@@ -342,7 +342,7 @@ def bpog_in_target_bbox(bpogx, bpogy, pos):
 
 ![Area of interest verification algorithm](Images/Fig4_4_10.png){#fig-aoi-valid fig-align="center"}
 
-With the area of interest fixation algorthmen, we can now have a look at the two metrics of this experiment. The target ratio and the non-target ratio. The target ratio describes the samples that were detected inside the target area of interest in relation to the total amount of examples. The non-target ratio describes the samples that were detected in all other areas of interest except the target aoi in relation to the total samples.
+With the area of interest fixation algorithm, we can now have a look at the two metrics of this experiment. The target ratio and the non-target ratio. The target ratio describes the samples that were detected inside the target area of interest in relation to the total amount of examples. The non-target ratio describes the samples that were detected in all other areas of interest except the target AOI in relation to the total samples.
 
 $$
 TR = \frac{\text{Samples on target AOI}}{\text{Total samples}}
@@ -351,7 +351,7 @@ $$
 NTR = \frac{\text{Samples on non-target AOIs}}{\text{Total samples}}
 $$
 
-With this two introduced metrics, a variety of interesting analysis and visualisations is possible. The target and non-target ratio can be looked at for an individual subject and sentence with a specific condition (see @fig-trntrstatic). 
+With these two introduced metrics, a variety of interesting analyses and visualisations is possible. The target and non-target ratio can be looked at for an individual subject and sentence with a specific condition (see @fig-trntrstatic). 
 
 ![Example targt ratio and non-target ratio for the static condition](Images/Fig4_4_9.png){#fig-trntrstatic fig-align="center"}
 
@@ -359,8 +359,8 @@ Another interesting insight is the average tr and ntr over all subjects for one 
 
 ![Example TR and NTR for an example sentence over all subjects](Images/Fig4_4_8.png){#fig-trntrsentence fig-align="center"} 
 
-Our goal is to compare the target ratio and non-target ratio for sentences with the static condition to the sentences with the motion condition. The TR and NTR are measured exactly 50 miliseconds before the *TARGETONSET* event and thereby before the target word is said. Since its only one measure point the TR and NTR for a single sentence can be 1 or 0. For each subject the average target and non-target ratio for all sentences with the static condition *tr(static)* and motion condition *tr(motion)* is calculated. <br>
+Our goal is to compare the target ratio and non-target ratio for sentences with the static condition to the sentences with the motion condition. The TR and NTR are measured exactly 50 milliseconds before the *TARGETONSET* event and thereby before the target word is said. Since its only one measure point the TR and NTR for a single sentence can be 1 or 0. For each subject, the average target and non-target ratio for all sentences with the static condition *tr(static)* and motion condition *tr(motion)* is calculated. <br>
 
-With the resulting metrics for each subjects, the total average, mean and standard deviation is calculated, visualized in a boxplot and interpreted. <br>
+With the resulting metrics for each subject, the total average, mean and standard deviation are calculated, visualized in a boxplot and interpreted. <br>
 
 The scripts to calculate all metrics mentioned above can be found in the project folder under *~/scripts/*.
