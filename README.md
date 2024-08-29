@@ -18,8 +18,7 @@
 ```
 │sub-team-cat (~)    <- Project's main folder.
 │
-├── report           <- Report HTML and PDF, **we recommend reading the HTML document**.
-│   ├── report.html
+├── report           <- Report HTML
 │   ├── report.pdf
 │
 ├── presentation     <- Final presentation slides (PDF and PPTX format).
