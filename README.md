@@ -19,7 +19,7 @@
 │sub-team-cat (~)    <- Project's main folder.
 │
 ├── report           <- Report HTML
-│   ├── report.pdf
+│   ├── report.html
 │
 ├── presentation     <- Final presentation slides (PDF and PPTX format).
 │
