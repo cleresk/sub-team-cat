@@ -11,7 +11,7 @@ The following table gives a detailed insight on how the workload of this project
 |   Data-Recording              |  o     |    x      |    x     |
 |   Data Analysis Scripts       |        |           |    x     |
 |   Report Writing              |  o     |    x      |    o     |
-|   Report Lectorate            |  x     |           |          |
+|   Report Lectorate            |  x     |    x      |    x     |
 |   Participant Acquisition     |  x     |    x      |    x     |
 |   Project Management          |        |    x      |          |
 
