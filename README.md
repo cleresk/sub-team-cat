@@ -18,33 +18,35 @@
 ```
 │sub-team-cat (~)    <- Project's main folder.
 │
-├── report           <- Report HTML and PDF, **we recommend the HTML document**
-|
-├── presentation     <- Final presentation slides (PDF and PPTX-format)
-|
+├── report           <- Report HTML and PDF, **we recommend reading the HTML document**.
+│   ├── report.html
+│   ├── report.pdf
+│
+├── presentation     <- Final presentation slides (PDF and PPTX format).
+│
 ├── _research        <- Literatue research, important papers, 
-|   					WIP scripts, code, notes, comments,
+│   					WIP scripts, code, notes, comments,
 │                       to-dos and anything in a preliminary state.
 │
-├── plots            <- All exported global and subejct specific plots. All plots can be 
-|                       recreated using the plotting scripts in the scripts folder.
+├── plots            <- All plots can be recreated using the plotting scripts in the scripts folder.
+│   ├── global       <- Global plots (for all subjects).
+│   ├── subject-i 	 <- Subject specific plots.
 │
 ├── scripts          <- Preprocessing and analysis scripts as Jupyter Notebooks.
 │
 ├── experiment       <- OpenSesame file to run the experiment with audio & visual stimuli. 
-|
+│
 ├── data             
-|   ├── raw          <- Raw eye-tracking data
-|   ├── preprocessed <- Data resulting from preprocessing
-|
+│   ├── raw          <- Raw eye-tracking data.
+│   ├── preprocessed <- Data resulting from preprocessing.
+│
 ├── stimuli          <- All possible stimuli during the experiment, used for plotting.
-|                       Stimuli table.
-|
+│                       Stimuli table.
+│
 ├── study_materials  <- Lab notes, consent and data privacy forms;   
-|   ├── lab_notes    <- Obeservations during the experiments.
-|
+│   ├── lab_notes    <- Obeservations during the experiments.
+│
 ├── README.md        <- Top-level README for reproducability.
 │
-└── requirements.txt <- List of modules and packages that are used for this project
-                     
+└── requirements.txt <- List of modules and packages that are used for this project.                     
 ```

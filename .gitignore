@@ -1,4 +1,4 @@
-experiment/
+# experiment/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -131,10 +131,10 @@ dmypy.json
 .pyre/
 
 # remove generated files
-report/*.html
+#report/*.html
 
-report/_analysis-methods_files
-report/_discussion_files
-report/_experimental-methods_files
-report/_introduction_files
-report/report_files
+#report/_analysis-methods_files
+#report/_discussion_files
+#report/_experimental-methods_files
+#report/_introduction_files
+#report/report_files
